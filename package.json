@@ -1,0 +1,84 @@
+{
+  "name": "suricatta-admin-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "rimraf": "./node_modules/.bin/rimraf",
+    "build": "next build",
+    "start:prod": "next start",
+    "start:dev": "next dev",
+    "lint": "next lint",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\" \"cypress/**/*.{js,jsx,ts,tsx}\" \"**/*.config.{js,ts}\" \"**/*.d.ts\" \"**/*.json\"",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "precy:ci": "rimraf .nyc_output coverage .next",
+    "precy:browser": "rimraf .nyc_output coverage .next",
+    "cy:ci": "cross-env INSTRUMENT_CODE=1 start-server-and-test start:dev http-get://127.0.0.1:3000 cy:run",
+    "cy:browser": "cross-env INSTRUMENT_CODE=1 start-server-and-test start:dev http-get://127.0.0.1:3000 cy:open",
+    "nyc:report": "npx nyc report --reporter=text",
+    "test:ui": "run-s cy:ci nyc:report",
+    "test:ui:dev": "run-s cy:browser nyc:report",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*.{jsx, js, ts, tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "cypress/**/*.spec.{js, ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.config.{js,ts}": [
+      "prettier --write"
+    ],
+    "**/*.d.ts": [
+      "prettier --write"
+    ],
+    "**/*.json": [
+      "prettier --write"
+    ]
+  },
+  "browserslist": "defaults, not ie <= 11",
+  "dependencies": {
+    "autoprefixer": "^10.4.7",
+    "axios": "^0.21.4",
+    "formik": "^2.2.9",
+    "next": "^12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "swr": "^1.3.0",
+    "tailwindcss": "^3.1.4",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.10.4",
+    "@tailwindcss/forms": "^0.5.2",
+    "@types/react": "^18.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "babel-plugin-istanbul": "^6.1.1",
+    "cross-env": "^7.0.3",
+    "cypress": "^10.6.0",
+    "cypress-file-upload": "^5.0.8",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.2.0",
+    "eslint-config-next": "12.2.3",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^7.0.4",
+    "istanbul-lib-coverage": "^3.2.0",
+    "lint-staged": "^12.1.7",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^15.1.0",
+    "prettier": "^2.7.0",
+    "prettier-plugin-tailwindcss": "^0.1.11",
+    "rimraf": "^5.0.0",
+    "start-server-and-test": "^2.0.0",
+    "typescript": "^4.8.4"
+  }
+}

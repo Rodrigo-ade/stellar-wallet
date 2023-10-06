@@ -1,0 +1,11 @@
+# Config
+*.config.js
+
+# Output
+.next
+.nyc_output
+coverage
+
+# Misc
+public
+package-lock.json
