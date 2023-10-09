@@ -1,4 +1,4 @@
-import { Keypair } from 'stellar-sdk';
+import { Keypair, StrKey } from 'stellar-sdk';
 
 interface KeyPair {
   publicKey: string;
@@ -10,4 +10,9 @@ export function getRandomKeyPair(): KeyPair {
   const publicKey = keyPair.publicKey();
   const privateKey = keyPair.secret();
   return { publicKey, privateKey };
+}
+
+export function isValidSecretKey(secretKey: string): boolean {
+  const isValidKey = StrKey.isValidEd25519SecretSeed(secretKey);
+  return isValidKey;
 }
