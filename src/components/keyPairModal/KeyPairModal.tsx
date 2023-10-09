@@ -14,7 +14,7 @@ export function KeyPairModal({ setShowKeys, privateKey, publicKey }: KeyPairModa
       setCopyKeysButtonText('Copied!');
       setTimeout(() => {
         setCopyKeysButtonText('Copy Keys');
-      },3000);
+      }, 3000);
     });
   }
 
@@ -54,9 +54,9 @@ export function KeyPairModal({ setShowKeys, privateKey, publicKey }: KeyPairModa
                     </p>
                     <div className="pt-2 text-left">
                       <p className="text-purple-200">Public Key:</p>
-                      <code className=" text-purple-500 break-all">{publicKey}</code>
+                      <code className=" break-all text-purple-500">{publicKey}</code>
                       <p className="mt-5 text-purple-200">Private Key:</p>
-                      <code className="text-purple-500 break-all">{privateKey}</code>
+                      <code className="break-all text-purple-500">{privateKey}</code>
                     </div>
                   </div>
                 </div>
