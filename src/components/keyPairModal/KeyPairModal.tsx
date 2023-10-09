@@ -4,10 +4,12 @@ import { ActionButton } from '../actionButton/ActionButton';
 export interface KeyPairModalProps {
   setShowKeys: (show: boolean) => void;
   privateKey: string;
+  setPrivateKey: (privateKey: string) => void;
   publicKey: string;
+  setPublicKey: (publicKey: string) => void;
 }
 
-export function KeyPairModal({ setShowKeys, privateKey, publicKey }: KeyPairModalProps) {
+export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey, setPublicKey }: KeyPairModalProps) {
   const [copyKeysButtonText, setCopyKeysButtonText] = useState<'Copy Keys' | 'Copied!'>('Copy Keys');
 
   function handleCopyKeys() {
@@ -17,6 +19,12 @@ export function KeyPairModal({ setShowKeys, privateKey, publicKey }: KeyPairModa
         setCopyKeysButtonText('Copy Keys');
       }, 3000);
     });
+  }
+
+  function handleCloseModal() {
+    setShowKeys(false);
+    setPrivateKey('');
+    setPublicKey('');
   }
 
   return (
@@ -65,7 +73,7 @@ export function KeyPairModal({ setShowKeys, privateKey, publicKey }: KeyPairModa
             </div>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
               <ActionButton title={copyKeysButtonText} handleClick={() => handleCopyKeys()} />
-              <ActionButton title="Close" handleClick={() => setShowKeys(false)} />
+              <ActionButton title="Close" handleClick={() => handleCloseModal()} />
             </div>
           </div>
         </div>
