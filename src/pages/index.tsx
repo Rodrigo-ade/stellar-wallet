@@ -23,7 +23,17 @@ const Home: NextPage = () => {
       <div>
         <ActionButton title="Generate new keys" handleClick={handleGenerateKeys} />
       </div>
-      {showKeys ? <KeyPairModal setShowKeys={setShowKeys} privateKey={privateKey} publicKey={publicKey} /> : ''}
+      {showKeys ? (
+        <KeyPairModal
+          setShowKeys={setShowKeys}
+          privateKey={privateKey}
+          setPrivateKey={setPrivateKey}
+          setPublicKey={setPublicKey}
+          publicKey={publicKey}
+        />
+      ) : (
+        ''
+      )}
     </div>
   );
 };
