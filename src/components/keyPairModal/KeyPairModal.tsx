@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ActionButton } from '../actionButton/ActionButton';
 
 export interface KeyPairModalProps {
   setShowKeys: (show: boolean) => void;
@@ -63,21 +64,8 @@ export function KeyPairModal({ setShowKeys, privateKey, publicKey }: KeyPairModa
               </div>
             </div>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
-              <button
-                type="button"
-                className="mt-5 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-slate-600	 sm:mt-0 sm:w-auto"
-                onClick={() => handleCopyKeys()}
-              >
-                {copyKeysButtonText}
-              </button>
-
-              <button
-                type="button"
-                className="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-slate-600	 sm:mt-0 sm:w-auto"
-                onClick={() => setShowKeys(false)}
-              >
-                Close
-              </button>
+              <ActionButton title={copyKeysButtonText} handleClick={() => handleCopyKeys()} />
+              <ActionButton title="Close" handleClick={() => setShowKeys(false)} />
             </div>
           </div>
         </div>
