@@ -1,4 +1,5 @@
-import { isValidSecretKey } from '@/services/stellar';
+import Router from 'next/router';
+import { isValidSecretKey, getPublicKey } from '@/services/stellar';
 import { ActionButton } from '../actionButton/ActionButton';
 
 interface ConnectModalProps {
@@ -22,7 +23,8 @@ export function ConnectModal({
       return;
     }
 
-    setIsValidKey(true);
+    const publicKey = getPublicKey(privateKey);
+    Router.push({pathname: '/dashboard' , query: {account: publicKey}});
   }
 
   function handleCloseModal() {
