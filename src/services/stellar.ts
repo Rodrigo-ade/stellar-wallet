@@ -16,3 +16,7 @@ export function isValidSecretKey(secretKey: string): boolean {
   const isValidKey = StrKey.isValidEd25519SecretSeed(secretKey);
   return isValidKey;
 }
+export function getPublicKey(privateKey: string): string {
+  const publicKey = Keypair.fromSecret(privateKey).publicKey();
+  return publicKey;
+}
