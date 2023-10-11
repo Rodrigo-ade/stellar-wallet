@@ -1,10 +1,10 @@
-export interface ActionButtonProps {
+export interface IActionButtonProps {
   title: string;
   handleClick: () => void;
   cyAttribute?: string;
 }
 
-export function ActionButton({ title, handleClick, cyAttribute }: ActionButtonProps) {
+export function ActionButton({ title, handleClick, cyAttribute }: IActionButtonProps) {
   return (
     <button
       data-cy={ cyAttribute ? cyAttribute : '' }

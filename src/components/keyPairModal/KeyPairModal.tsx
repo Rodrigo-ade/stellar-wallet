@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ActionButton } from '../actionButton/ActionButton';
 
-export interface KeyPairModalProps {
+export interface IKeyPairModalProps {
   setShowKeys: (show: boolean) => void;
   privateKey: string;
   setPrivateKey: (privateKey: string) => void;
@@ -9,7 +9,7 @@ export interface KeyPairModalProps {
   setPublicKey: (publicKey: string) => void;
 }
 
-export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey, setPublicKey }: KeyPairModalProps) {
+export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey, setPublicKey }: IKeyPairModalProps) {
   const [copyKeysButtonText, setCopyKeysButtonText] = useState<'Copy Keys' | 'Copied!'>('Copy Keys');
 
   function handleCopyKeys() {

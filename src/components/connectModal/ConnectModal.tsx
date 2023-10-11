@@ -2,7 +2,7 @@ import Router from 'next/router';
 import { isValidSecretKey, getPublicKey } from '@/services/stellar';
 import { ActionButton } from '../actionButton/ActionButton';
 
-interface ConnectModalProps {
+interface IConnectModalProps {
   setShowConnectModal: (show: boolean) => void;
   isValidKey: boolean;
   setIsValidKey: (isValid: boolean) => void;
@@ -16,7 +16,7 @@ export function ConnectModal({
   setIsValidKey,
   privateKey,
   setPrivateKey,
-}: ConnectModalProps) {
+}: IConnectModalProps) {
   function handleConnect() {
     if (!isValidSecretKey(privateKey)) {
       setIsValidKey(false);
