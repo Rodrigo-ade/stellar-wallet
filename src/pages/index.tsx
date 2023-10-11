@@ -5,7 +5,9 @@ import { ActionButton } from '@/components/actionButton/ActionButton';
 import { KeyPairModal } from '@/components/keyPairModal/KeyPairModal';
 import { ConnectModal } from '@/components/connectModal/ConnectModal';
 
-import { getRandomKeyPair } from '@/services/stellar';
+import { getRandomKeyPair, isValidSecretKey, getPublicKey } from '@/services/stellar';
+
+import { redirectToDashboard } from '@/utils/utils';
 
 const Home: NextPage = () => {
   const [privateKey, setPrivateKey] = useState('');
@@ -50,6 +52,9 @@ const Home: NextPage = () => {
           setIsValidKey={setIsValidKey}
           privateKey={privateKey}
           setPrivateKey={setPrivateKey}
+          isValidSecretKey={isValidSecretKey}
+          getPublicKey={getPublicKey}
+          redirectToDashboard={redirectToDashboard}
         />
       ) : (
         ''
