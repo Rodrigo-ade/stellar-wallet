@@ -15,9 +15,9 @@ const Home: NextPage = () => {
   const [isValidKey, setIsValidKey] = useState(true);
 
   function handleGenerateKeys() {
-    const keys = getRandomKeyPair();
-    setPublicKey(keys.publicKey);
-    setPrivateKey(keys.privateKey);
+    const { publicKey, privateKey } = getRandomKeyPair();
+    setPublicKey(publicKey);
+    setPrivateKey(privateKey);
     setShowKeys(true);
   }
 
