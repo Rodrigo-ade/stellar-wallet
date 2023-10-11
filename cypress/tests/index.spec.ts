@@ -12,18 +12,18 @@ context("Index", () => {
       cy.visit(DEFAULT_URL);
     });
 
-    it('"Generate Key" button should exist', () => {
       cy.get('[data-cy="keys-button"]').should('exist');
+    it('Should exist "Generate Key" button', () => {
     });
 
-    it('"Connect with secret key" button should exist', () => {
       cy.get('[data-cy="connect-button"]').should('exist');
+    it('Should exist "Connect with secret key" button', () => {
     })
   });;
 
   describe('Key Modal', () => {
-    it('"Generate Key" button should open modal', () => {
       cy.get('[data-cy="keys-button"]').click();
+    it('Should open modal when "Generate Key" button is clicked', () => {
       cy.get('[data-cy="key-modal"]').should('be.visible');
     });
 
@@ -53,9 +53,9 @@ context("Index", () => {
   });
 
   describe('Connect Modal', () => {
-    it('"Connect" button should open modal', () => {
       cy.get('[data-cy="connect-button"]').click();
       cy.get('[data-cy="connect-modal"]').should('be.visible');
+    it('Should open modal when "Connect" button is clicked', () => {
     });
 
     it('Should show error with invalid secret key', () => {
