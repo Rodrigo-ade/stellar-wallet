@@ -17,6 +17,5 @@ export function isValidSecretKey(secretKey: string): boolean {
   return isValidKey;
 }
 export function getPublicKey(privateKey: string): string {
-  const publicKey = Keypair.fromSecret(privateKey).publicKey();
-  return publicKey;
+  return Keypair.fromSecret(privateKey).publicKey();
 }
