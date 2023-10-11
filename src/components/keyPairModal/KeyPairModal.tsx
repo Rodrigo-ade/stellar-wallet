@@ -13,11 +13,12 @@ export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey
   const [copyKeysButtonText, setCopyKeysButtonText] = useState<'Copy Keys' | 'Copied!'>('Copy Keys');
 
   function handleCopyKeys() {
+    const BUTTON_TEXT_DELAY = 3000;
     navigator.clipboard.writeText(`Public Key: ${publicKey} Private Key: ${privateKey}`).then(() => {
       setCopyKeysButtonText('Copied!');
       setTimeout(() => {
         setCopyKeysButtonText('Copy Keys');
-      }, 3000);
+      }, BUTTON_TEXT_DELAY);
     });
   }
 
