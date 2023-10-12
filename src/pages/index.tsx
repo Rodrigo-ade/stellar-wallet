@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   const [publicKey, setPublicKey] = useState('');
   const [showKeys, setShowKeys] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
-  const [isValidKey, setIsValidKey] = useState(true);
+  const [isKeyValid, setIsKeyValid] = useState(true);
 
   function handleGenerateKeys() {
     const { publicKey, privateKey } = getRandomKeyPair();
@@ -48,8 +48,8 @@ const Home: NextPage = () => {
       {showConnectModal ? (
         <ConnectModal
           setShowConnectModal={setShowConnectModal}
-          isValidKey={isValidKey}
-          setIsValidKey={setIsValidKey}
+          isKeyValid={isKeyValid}
+          setIsKeyValid={setIsKeyValid}
           privateKey={privateKey}
           setPrivateKey={setPrivateKey}
           isSecretKeyValid={isSecretKeyValid}

@@ -2,8 +2,8 @@ import { ActionButton } from '../actionButton/ActionButton';
 
 interface IConnectModalProps {
   setShowConnectModal: (show: boolean) => void;
-  isValidKey: boolean;
-  setIsValidKey: (isValid: boolean) => void;
+  isKeyValid: boolean;
+  setIsKeyValid: (isValid: boolean) => void;
   privateKey: string;
   setPrivateKey: (privateKey: string) => void;
   isSecretKeyValid: (privateKey: string) => boolean;
@@ -13,8 +13,8 @@ interface IConnectModalProps {
 
 export function ConnectModal({
   setShowConnectModal,
-  isValidKey,
-  setIsValidKey,
+  isKeyValid,
+  setIsKeyValid,
   privateKey,
   setPrivateKey,
   isSecretKeyValid,
@@ -23,7 +23,7 @@ export function ConnectModal({
 }: IConnectModalProps) {
   function handleConnect() {
     if (!isSecretKeyValid(privateKey)) {
-      setIsValidKey(false);
+      setIsKeyValid(false);
       return;
     }
 
@@ -33,7 +33,7 @@ export function ConnectModal({
 
   function handleCloseModal() {
     setShowConnectModal(false);
-    setIsValidKey(true);
+    setIsKeyValid(true);
   }
 
   return (
@@ -61,7 +61,7 @@ export function ConnectModal({
                   }}
                   data-cy="key-input"
                 />
-                {!isValidKey ? (
+                {!isKeyValid ? (
                   <p className="mt-2 text-xl text-red-500" data-cy="key-error">
                     Invalid secret key
                   </p>
