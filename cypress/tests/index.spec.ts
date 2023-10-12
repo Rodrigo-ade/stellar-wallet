@@ -8,8 +8,8 @@ const INVALID_KEY_MESSAGE = 'Invalid secret key';
 context('Index', () => {
   beforeEach(() => {
     cy.visit(DEFAULT_URL);
-    cy.get('[data-cy="keys-button"]').as('getKeysButton');
-    cy.get('[data-cy="connect-button"]').as('connectButton');
+    cy.get('.keys-button').as('getKeysButton');
+    cy.get('.connect-button').as('connectButton');
   });
 
   describe('Index page', () => {
@@ -37,7 +37,7 @@ context('Index', () => {
 
     it('Should copy keys when copy button is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('[data-cy="copy-button"]').click();
+      cy.get('.copy-button').click();
 
       cy.window()
         .its('navigator.clipboard')
@@ -49,7 +49,7 @@ context('Index', () => {
 
     it('Should be closed when close is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('[data-cy="close-button"]').click();
+      cy.get('.close-button').click();
       cy.get('[data-cy="key-modal"]').should('not.exist');
     });
   });
@@ -59,7 +59,7 @@ context('Index', () => {
       cy.get('@connectButton').click();
       cy.get('[data-cy="connect-modal"]').as('connectModal');
       cy.get('[data-cy="key-input"]').as('keyInput');
-      cy.get('[data-cy="connect-modal-button"]').as('connectModalButton');
+      cy.get('.connect-modal-button').as('connectModalButton');
     });
 
     it('Should open modal when "Connect" button is clicked', () => {
@@ -73,7 +73,7 @@ context('Index', () => {
     });
 
     it('Should be closed when close button is clicked', () => {
-      cy.get('[data-cy="close-button"]').click();
+      cy.get('.close-button').click();
       cy.get('@connectModal').should('not.exist');
     });
 
