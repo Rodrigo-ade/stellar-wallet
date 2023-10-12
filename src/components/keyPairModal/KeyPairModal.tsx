@@ -32,9 +32,12 @@ export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey
     <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <div className="fixed inset-0 bg-purple-dark bg-opacity-75 transition-opacity"></div>
 
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto" >
+      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div className="flex min-h-full items-end justify-center p-5 text-center sm:items-center sm:p-0">
-          <div className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg" data-cy="key-modal">
+          <div
+            className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+            data-cy="key-modal"
+          >
             <div className="bg-purple-highlight px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
                 <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:mx-0 sm:h-10 sm:w-10">
@@ -64,9 +67,13 @@ export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey
                     </p>
                     <div className="pt-2 text-left">
                       <p className="text-purple-200">Public Key:</p>
-                      <code className="break-all text-purple-500" data-cy="public-key">{publicKey}</code>
+                      <code className="break-all text-purple-500" data-cy="public-key">
+                        {publicKey}
+                      </code>
                       <p className="mt-5 text-purple-200">Private Key:</p>
-                      <code className="break-all text-purple-500" data-cy="private-key">{privateKey}</code>
+                      <code className="break-all text-purple-500" data-cy="private-key">
+                        {privateKey}
+                      </code>
                     </div>
                   </div>
                 </div>
@@ -74,7 +81,7 @@ export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey
             </div>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
               <ActionButton title={copyKeysButtonText} handleClick={() => handleCopyKeys()} cyAttribute="copy-button" />
-              <ActionButton title="Close" handleClick={() => handleCloseModal()} cyAttribute="close-button"/>
+              <ActionButton title="Close" handleClick={() => handleCloseModal()} cyAttribute="close-button" />
             </div>
           </div>
         </div>

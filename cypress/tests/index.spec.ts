@@ -5,7 +5,7 @@ const INVALID_PRIVATE_KEY = 'GGAJOGAJOPAGJOPGAJOPGAJPAGPJOA08421';
 const VALID_PRIVATE_KEY = 'SAZ5WSF7U7KB43CAU4IU7TMYNLH67S3WN4I42GHLGHMOCJBC7CPLDHTV';
 const INVALID_KEY_MESSAGE = 'Invalid secret key';
 
-context("Index", () => {
+context('Index', () => {
   beforeEach(() => {
     cy.visit(DEFAULT_URL);
     cy.get('[data-cy="keys-button"]').as('getKeysButton');
@@ -19,7 +19,7 @@ context("Index", () => {
 
     it('Should exist "Connect with secret key" button', () => {
       cy.get('@connectButton').should('exist');
-    })
+    });
   });
 
   describe('Key Modal', () => {
@@ -30,21 +30,19 @@ context("Index", () => {
 
     it('Should provide a pair of keys', () => {
       cy.get('@getKeysButton').click();
-      cy.get('[data-cy="private-key"]').invoke('text')
-        .should('not.be.empty')
-        .should('have.length.at.least', 50);
+      cy.get('[data-cy="private-key"]').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
 
-      cy.get('[data-cy="public-key"]').invoke('text')
-        .should('not.be.empty')
-        .should('have.length.at.least', 50);
+      cy.get('[data-cy="public-key"]').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
     });
 
     it('Should copy keys when copy button is clicked', () => {
       cy.get('@getKeysButton').click();
       cy.get('[data-cy="copy-button"]').click();
 
-      cy.window().its('navigator.clipboard').invoke('readText')
-        .should('have.length.above',100)
+      cy.window()
+        .its('navigator.clipboard')
+        .invoke('readText')
+        .should('have.length.above', 100)
         .should('contain', 'Public Key: G')
         .should('contain', 'Private Key: S');
     });
@@ -71,9 +69,7 @@ context("Index", () => {
     it('Should show error with invalid secret key', () => {
       cy.get('@keyInput').type(INVALID_PRIVATE_KEY);
       cy.get('@connectModalButton').click();
-      cy.get('[data-cy="key-error"]')
-        .should('be.visible')
-        .should('contain.text', INVALID_KEY_MESSAGE);
+      cy.get('[data-cy="key-error"]').should('be.visible').should('contain.text', INVALID_KEY_MESSAGE);
     });
 
     it('Should be closed when close button is clicked', () => {
