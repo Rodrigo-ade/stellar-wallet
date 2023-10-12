@@ -6,7 +6,7 @@ interface IConnectModalProps {
   setIsValidKey: (isValid: boolean) => void;
   privateKey: string;
   setPrivateKey: (privateKey: string) => void;
-  isValidSecretKey: (privateKey: string) => boolean;
+  isSecretKeyValid: (privateKey: string) => boolean;
   getPublicKey: (privateKey: string) => string;
   redirectToDashboard: (publicKey: string) => void;
 }
@@ -17,12 +17,12 @@ export function ConnectModal({
   setIsValidKey,
   privateKey,
   setPrivateKey,
-  isValidSecretKey,
+  isSecretKeyValid,
   getPublicKey,
   redirectToDashboard,
 }: IConnectModalProps) {
   function handleConnect() {
-    if (!isValidSecretKey(privateKey)) {
+    if (!isSecretKeyValid(privateKey)) {
       setIsValidKey(false);
       return;
     }

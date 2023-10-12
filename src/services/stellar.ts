@@ -12,7 +12,7 @@ export function getRandomKeyPair(): KeyPair {
   return { publicKey, privateKey };
 }
 
-export function isValidSecretKey(secretKey: string): boolean {
+export function isSecretKeyValid(secretKey: string): boolean {
   return StrKey.isValidEd25519SecretSeed(secretKey);
 }
 
