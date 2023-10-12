@@ -13,7 +13,9 @@ export function getRandomKeyPair(): KeyPair {
 }
 
 export function isValidSecretKey(secretKey: string): boolean {
+  return StrKey.isValidEd25519SecretSeed(secretKey);
 }
+
 export function getPublicKey(privateKey: string): string {
   return Keypair.fromSecret(privateKey).publicKey();
 }
