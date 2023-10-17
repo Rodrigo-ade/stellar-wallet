@@ -23,6 +23,9 @@ const stateSlice = createSlice({
       const { id } = action.payload;
       return { ...state, loading: false, accountData: { id }, notification: null };
     },
+    logOut: (state) => {
+      return { ...state, loading: false, accountData: null, notification: null };
+    },
     loading: (state) => {
       return { ...state, loading: true, accountData: null, notification: null };
     },
