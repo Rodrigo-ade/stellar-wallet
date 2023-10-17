@@ -23,10 +23,13 @@ const stateSlice = createSlice({
       const { id } = action.payload;
       return { ...state, loading: false, accountData: { id }, notification: null };
     },
+    loading: (state) => {
+      return { ...state, loading: true, accountData: null, notification: null };
+    },
   },
 });
 
-export const { logIn } = stateSlice.actions;
+export const { logIn, loading, } = stateSlice.actions;
 
 interface IAccountStateProps {
   accountState: IStorageAccountStateProps;
