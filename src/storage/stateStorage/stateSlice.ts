@@ -26,4 +26,7 @@ const stateSlice = createSlice({
   },
 });
 
+interface IAccountStateProps {
+  accountState: IStorageAccountStateProps;
+}
 export default stateSlice.reducer;
