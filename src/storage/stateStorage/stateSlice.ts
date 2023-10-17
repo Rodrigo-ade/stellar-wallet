@@ -1,6 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState= {
+import { Notification } from '@/entities/notification';
+import { AccountData } from '@/entities/accountData';
+
+interface IStorageAccountStateProps {
+  accountData: AccountData | null;
+  loading: boolean;
+  notification: Notification | null;
+}
+
+const initialState: IStorageAccountStateProps = {
   accountData: null,
   loading: false,
   notification: null,
