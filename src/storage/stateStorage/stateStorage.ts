@@ -5,9 +5,11 @@ import { persistReducer } from 'redux-persist';
 import { combineReducers } from '@reduxjs/toolkit';
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 
+const STATE_HYDRATION_TIMEOUT = 300;
 
 const persistConfig = {
   key: 'root',
+  timeout: STATE_HYDRATION_TIMEOUT,
   version: 1,
   storage,
 };
