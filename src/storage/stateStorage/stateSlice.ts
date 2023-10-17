@@ -26,7 +26,12 @@ const stateSlice = createSlice({
   },
 });
 
+export const { logIn } = stateSlice.actions;
+
 interface IAccountStateProps {
   accountState: IStorageAccountStateProps;
 }
+
+export const selectAccountData = (state: IAccountStateProps) => state.accountState.accountData;
+
 export default stateSlice.reducer;
