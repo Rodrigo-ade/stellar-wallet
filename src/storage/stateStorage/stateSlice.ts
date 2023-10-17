@@ -18,7 +18,6 @@ const initialState: IStorageAccountStateProps = {
 const stateSlice = createSlice({
   name: 'state',
   initialState,
-  reducers: {},
   reducers: {
     logIn: (state, action) => {
       const { id } = action.payload;
