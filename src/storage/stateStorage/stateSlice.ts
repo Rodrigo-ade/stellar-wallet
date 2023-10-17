@@ -19,6 +19,12 @@ const stateSlice = createSlice({
   name: 'state',
   initialState,
   reducers: {},
+  reducers: {
+    logIn: (state, action) => {
+      const { id } = action.payload;
+      return { ...state, loading: false, accountData: { id }, notification: null };
+    },
+  },
 });
 
 export default stateSlice.reducer;
