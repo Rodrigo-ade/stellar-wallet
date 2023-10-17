@@ -36,7 +36,7 @@ const stateSlice = createSlice({
   },
 });
 
-export const { logIn, loading, } = stateSlice.actions;
+export const { logIn, logOut, loading, notify } = stateSlice.actions;
 
 interface IAccountStateProps {
   accountState: IStorageAccountStateProps;
