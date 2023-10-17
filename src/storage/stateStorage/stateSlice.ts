@@ -33,5 +33,7 @@ interface IAccountStateProps {
 }
 
 export const selectAccountData = (state: IAccountStateProps) => state.accountState.accountData;
+export const selectLoading = (state: IAccountStateProps) => state.accountState.loading;
+export const selectNotification = (state: IAccountStateProps) => state.accountState.notification;
 
 export default stateSlice.reducer;
