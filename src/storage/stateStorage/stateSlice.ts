@@ -26,6 +26,10 @@ const stateSlice = createSlice({
     loading: (state) => {
       return { ...state, loading: true, accountData: null, notification: null };
     },
+    notify: (state, action) => {
+      const { isSuccess, message } = action.payload;
+      return { ...state, loading: false, notification: { isSuccess, message } };
+    },
   },
 });
 
