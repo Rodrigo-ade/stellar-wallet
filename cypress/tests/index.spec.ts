@@ -37,7 +37,7 @@ context('Index', () => {
 
     it('Should copy keys when copy button is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('.copy-button').click();
+      cy.get('.key-modal').find('.action-button').eq(0).click();
 
       cy.window()
         .its('navigator.clipboard')
@@ -49,7 +49,7 @@ context('Index', () => {
 
     it('Should be closed when close is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('.close-button').click();
+      cy.get('.key-modal').find('.action-button').eq(1).click();
       cy.get('.key-modal').should('not.exist');
     });
   });
@@ -57,9 +57,9 @@ context('Index', () => {
   describe('Connect Modal', () => {
     beforeEach(() => {
       cy.get('@connectButton').click();
-      cy.get('.connect-modal-button').as('connectModalButton');
       cy.get('.connect-modal').as('connectModal');
       cy.get('.key-input').as('keyInput');
+      cy.get('@connectModal').find('.action-button').eq(0).as('connectModalButton');
     });
 
     it('Should open modal when "Connect" button is clicked', () => {
@@ -73,7 +73,7 @@ context('Index', () => {
     });
 
     it('Should be closed when close button is clicked', () => {
-      cy.get('.close-button').click();
+      cy.get('@connectModal').find('.action-button').eq(1).click();
       cy.get('@connectModal').should('not.exist');
     });
 
