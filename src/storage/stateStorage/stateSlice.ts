@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Account } from '@/entities/Account';
 
 interface IStorageAccountStateProps {
-  accountData: Account | null;
+  account: Account | null;
   loading: boolean;
 }
 
 const initialState: IStorageAccountStateProps = {
-  accountData: null,
+  account: null,
   loading: false,
 };
 
@@ -18,13 +18,13 @@ const stateSlice = createSlice({
   reducers: {
     logIn: (state, action) => {
       const { id } = action.payload;
-      return { ...state, loading: false, accountData: { id }, notification: null };
+      return { ...state, loading: false, account: { id }, notification: null };
     },
     logOut: (state) => {
-      return { ...state, loading: false, accountData: null, notification: null };
+      return { ...state, loading: false, account: null, notification: null };
     },
     loading: (state) => {
-      return { ...state, loading: true, accountData: null, notification: null };
+      return { ...state, loading: true, account: null, notification: null };
     }
   },
 });
