@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { AccountData } from '@/entities/accountData';
+import { Account } from '@/entities/Account';
 
 interface IStorageAccountStateProps {
-  accountData: AccountData | null;
+  accountData: Account | null;
   loading: boolean;
 }
 
