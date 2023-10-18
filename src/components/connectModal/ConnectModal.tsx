@@ -71,8 +71,8 @@ export function ConnectModal({
               </div>
             </form>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
-              <ActionButton title="Connect" handleClick={() => handleConnect()} cyAttribute="connect-modal-button" />
-              <ActionButton title="Close" handleClick={() => handleCloseModal()} cyAttribute="close-button" />
+              <ActionButton title="Connect" handleClick={() => handleConnect()} />
+              <ActionButton title="Close" handleClick={() => handleCloseModal()} />
             </div>
           </div>
         </div>
