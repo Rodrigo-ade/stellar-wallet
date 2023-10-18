@@ -35,7 +35,7 @@ interface IAccountStateProps {
   accountState: IStorageAccountStateProps;
 }
 
-export const selectAccountData = (state: IAccountStateProps) => state.accountState.accountData;
+export const selectAccount = (state: IAccountStateProps) => state.accountState.account;
 export const selectLoading = (state: IAccountStateProps) => state.accountState.loading;
 
 export default stateSlice.reducer;
