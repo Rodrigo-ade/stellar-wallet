@@ -8,8 +8,8 @@ const INVALID_KEY_MESSAGE = 'Invalid secret key';
 context('Index', () => {
   beforeEach(() => {
     cy.visit(DEFAULT_URL);
-    cy.get('.keys-button').as('getKeysButton');
-    cy.get('.connect-button').as('connectButton');
+    cy.get('.action-button').eq(0).as('getKeysButton');
+    cy.get('.action-button').eq(1).as('connectButton');
   });
 
   describe('Index page', () => {
