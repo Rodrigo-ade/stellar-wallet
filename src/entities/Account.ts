@@ -1,4 +1,4 @@
-export class AccountData {
+export class Account {
   id: string;
 
   constructor(id: string) {
