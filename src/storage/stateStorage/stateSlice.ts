@@ -7,6 +7,10 @@ interface IStorageAccountStateProps {
   loading: boolean;
 }
 
+interface IAccountStateProps {
+  accountState: IStorageAccountStateProps;
+}
+
 const initialState: IStorageAccountStateProps = {
   account: null,
   loading: false,
@@ -30,10 +34,6 @@ const stateSlice = createSlice({
 });
 
 export const { logIn, logOut, loading } = stateSlice.actions;
-
-interface IAccountStateProps {
-  accountState: IStorageAccountStateProps;
-}
 
 export const selectAccount = (state: IAccountStateProps) => state.accountState.account;
 export const selectLoading = (state: IAccountStateProps) => state.accountState.loading;
