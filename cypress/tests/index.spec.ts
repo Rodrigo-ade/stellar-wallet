@@ -50,7 +50,7 @@ context('Index', () => {
     it('Should be closed when close is clicked', () => {
       cy.get('@getKeysButton').click();
       cy.get('.close-button').click();
-      cy.get('[data-cy="key-modal"]').should('not.exist');
+      cy.get('.key-modal').should('not.exist');
     });
   });
 
