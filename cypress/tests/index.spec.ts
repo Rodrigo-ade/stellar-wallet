@@ -25,14 +25,14 @@ context('Index', () => {
   describe('Key Modal', () => {
     it('Should open modal when "Generate Key" button is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('[data-cy="key-modal"]').should('be.visible');
+      cy.get('.key-modal').should('be.visible');
     });
 
     it('Should provide a pair of keys', () => {
       cy.get('@getKeysButton').click();
-      cy.get('[data-cy="private-key"]').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
+      cy.get('.private-key').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
 
-      cy.get('[data-cy="public-key"]').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
+      cy.get('.public-key').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
     });
 
     it('Should copy keys when copy button is clicked', () => {
@@ -57,9 +57,9 @@ context('Index', () => {
   describe('Connect Modal', () => {
     beforeEach(() => {
       cy.get('@connectButton').click();
-      cy.get('[data-cy="connect-modal"]').as('connectModal');
-      cy.get('[data-cy="key-input"]').as('keyInput');
       cy.get('.connect-modal-button').as('connectModalButton');
+      cy.get('.connect-modal').as('connectModal');
+      cy.get('.key-input').as('keyInput');
     });
 
     it('Should open modal when "Connect" button is clicked', () => {
@@ -69,7 +69,7 @@ context('Index', () => {
     it('Should show error with invalid secret key', () => {
       cy.get('@keyInput').type(INVALID_PRIVATE_KEY);
       cy.get('@connectModalButton').click();
-      cy.get('[data-cy="key-error"]').should('be.visible').should('contain.text', INVALID_KEY_MESSAGE);
+      cy.get('.key-error').should('be.visible').should('contain.text', INVALID_KEY_MESSAGE);
     });
 
     it('Should be closed when close button is clicked', () => {
