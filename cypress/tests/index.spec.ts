@@ -8,8 +8,8 @@ const INVALID_KEY_MESSAGE = 'Invalid secret key';
 context('Index', () => {
   beforeEach(() => {
     cy.visit(DEFAULT_URL);
-    cy.get('.keys-button').as('getKeysButton');
-    cy.get('.connect-button').as('connectButton');
+    cy.get('.action-button').eq(0).as('getKeysButton');
+    cy.get('.action-button').eq(1).as('connectButton');
   });
 
   describe('Index page', () => {
@@ -25,19 +25,19 @@ context('Index', () => {
   describe('Key Modal', () => {
     it('Should open modal when "Generate Key" button is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('[data-cy="key-modal"]').should('be.visible');
+      cy.get('.key-modal').should('be.visible');
     });
 
     it('Should provide a pair of keys', () => {
       cy.get('@getKeysButton').click();
-      cy.get('[data-cy="private-key"]').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
+      cy.get('.private-key').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
 
-      cy.get('[data-cy="public-key"]').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
+      cy.get('.public-key').invoke('text').should('not.be.empty').should('have.length.at.least', 50);
     });
 
     it('Should copy keys when copy button is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('.copy-button').click();
+      cy.get('.key-modal').find('.action-button').eq(0).click();
 
       cy.window()
         .its('navigator.clipboard')
@@ -49,17 +49,17 @@ context('Index', () => {
 
     it('Should be closed when close is clicked', () => {
       cy.get('@getKeysButton').click();
-      cy.get('.close-button').click();
-      cy.get('[data-cy="key-modal"]').should('not.exist');
+      cy.get('.key-modal').find('.action-button').eq(1).click();
+      cy.get('.key-modal').should('not.exist');
     });
   });
 
   describe('Connect Modal', () => {
     beforeEach(() => {
       cy.get('@connectButton').click();
-      cy.get('[data-cy="connect-modal"]').as('connectModal');
-      cy.get('[data-cy="key-input"]').as('keyInput');
-      cy.get('.connect-modal-button').as('connectModalButton');
+      cy.get('.connect-modal').as('connectModal');
+      cy.get('.key-input').as('keyInput');
+      cy.get('@connectModal').find('.action-button').eq(0).as('connectModalButton');
     });
 
     it('Should open modal when "Connect" button is clicked', () => {
@@ -69,11 +69,11 @@ context('Index', () => {
     it('Should show error with invalid secret key', () => {
       cy.get('@keyInput').type(INVALID_PRIVATE_KEY);
       cy.get('@connectModalButton').click();
-      cy.get('[data-cy="key-error"]').should('be.visible').should('contain.text', INVALID_KEY_MESSAGE);
+      cy.get('.key-error').should('be.visible').should('contain.text', INVALID_KEY_MESSAGE);
     });
 
     it('Should be closed when close button is clicked', () => {
-      cy.get('.close-button').click();
+      cy.get('@connectModal').find('.action-button').eq(1).click();
       cy.get('@connectModal').should('not.exist');
     });
 
