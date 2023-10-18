@@ -43,8 +43,7 @@ export function ConnectModal({
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div className="flex min-h-full justify-center p-5 text-center sm:items-center sm:p-0">
           <div
-            className="relative transform overflow-hidden rounded-lg shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
-            data-cy="connect-modal"
+            className="connect-modal relative transform overflow-hidden rounded-lg shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
           >
             <div className="bg-purple-highlight px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <h3 className="text-2xl text-slate-200">Connect with a secret key</h3>
@@ -52,17 +51,16 @@ export function ConnectModal({
             <form className="bg-purple-highlight p-2">
               <div className="mb-4">
                 <input
-                  className="w-full rounded bg-purple-highlight text-sm text-purple-500 shadow"
+                  className="key-input w-full rounded bg-purple-highlight text-sm text-purple-500 shadow"
                   type="text"
                   placeholder="Private Key"
                   value={privateKey}
                   onChange={(e) => {
                     setPrivateKey(e.target.value);
                   }}
-                  data-cy="key-input"
                 />
                 {!isKeyValid ? (
-                  <p className="mt-2 text-xl text-red-500" data-cy="key-error">
+                  <p className="key-error mt-2 text-xl text-red-500">
                     Invalid secret key
                   </p>
                 ) : (
