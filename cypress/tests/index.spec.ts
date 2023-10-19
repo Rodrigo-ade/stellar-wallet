@@ -81,7 +81,6 @@ context('Index', () => {
       cy.get('@keyInput').clear();
       cy.get('@keyInput').type(VALID_PRIVATE_KEY);
       cy.get('@connectModalButton').click();
-      cy.wait(500);
       cy.url().should('not.equal', DEFAULT_URL);
     });
   });
