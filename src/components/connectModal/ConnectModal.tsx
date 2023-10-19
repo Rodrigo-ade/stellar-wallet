@@ -31,7 +31,7 @@ export function ConnectModal({
     redirectToDashboard(publicKey);
   }
 
-  function handleCloseModal() {
+  function handleCloseConnectModal() {
     setShowConnectModal(false);
     setIsKeyValid(true);
   }
@@ -70,7 +70,7 @@ export function ConnectModal({
             </form>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
               <ActionButton title="Connect" handleClick={() => handleConnect()} />
-              <ActionButton title="Close" handleClick={() => handleCloseModal()} />
+              <ActionButton title="Close" handleClick={() => handleCloseConnectModal()} />
             </div>
           </div>
         </div>
