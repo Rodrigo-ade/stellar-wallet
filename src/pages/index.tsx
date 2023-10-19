@@ -54,7 +54,6 @@ const Home: NextPage = () => {
           setPrivateKey={setPrivateKey}
           isSecretKeyValid={isSecretKeyValid}
           getPublicKey={getPublicKey}
-          redirectToDashboard={redirectToDashboard}
         />
       ) : (
         ''
