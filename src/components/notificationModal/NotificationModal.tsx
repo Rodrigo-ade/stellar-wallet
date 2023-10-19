@@ -2,10 +2,18 @@ import { Notification } from '@/entities/Notification';
 
 export interface INotificationModalProps {
   notification: Notification;
+  redirect?: (() => void) | null;
 }
 
-export function NotificationModal({ notification }: INotificationModalProps) {
+export function NotificationModal({ notification, redirect = null }: INotificationModalProps) {
   const { isSuccess, message } = notification;
+
+  if (redirect) {
+    const REDIRECT_TIMEOUT = 3500;
+    setTimeout(() => {
+      redirect();
+    }, REDIRECT_TIMEOUT);
+  }
 
   return (
     <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
