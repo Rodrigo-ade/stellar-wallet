@@ -62,6 +62,7 @@ const Home: NextPage = () => {
           setPrivateKey={setPrivateKey}
           isSecretKeyValid={isSecretKeyValid}
           getPublicKey={getPublicKey}
+          logInUser={logInUser}
         />
       ) : (
         ''

@@ -8,6 +8,7 @@ interface IConnectModalProps {
   setPrivateKey: (privateKey: string) => void;
   isSecretKeyValid: (privateKey: string) => boolean;
   getPublicKey: (privateKey: string) => string;
+  logInUser: (publicKey: string) => void;
 }
 
 export function ConnectModal({
@@ -18,6 +19,7 @@ export function ConnectModal({
   setPrivateKey,
   isSecretKeyValid,
   getPublicKey,
+  logInUser,
 }: IConnectModalProps) {
   function handleConnect() {
     if (!isSecretKeyValid(privateKey)) {
@@ -26,6 +28,7 @@ export function ConnectModal({
     }
 
     const publicKey = getPublicKey(privateKey);
+    logInUser(publicKey);
   }
 
   function handleCloseConnectModal() {
