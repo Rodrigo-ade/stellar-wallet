@@ -32,7 +32,7 @@ const Home: NextPage = () => {
       <h1 className="text-6xl text-slate-400">Stellar Wallet</h1>
       <div>
         <ActionButton title="Generate new keys" handleClick={() => handleGenerateKeys()} />
-        <ActionButton title="Connect with secret key" handleClick={() => handleLogIn()}  />
+        <ActionButton title="Connect with secret key" handleClick={() => handleLogIn()} />
       </div>
       {showKeys ? (
         <KeyPairModal

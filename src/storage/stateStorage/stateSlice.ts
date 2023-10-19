@@ -29,7 +29,7 @@ const stateSlice = createSlice({
     },
     loading: (state) => {
       return { ...state, loading: true, account: null, notification: null };
-    }
+    },
   },
 });
 
