@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { ActionButton } from '@/components/actionButton/ActionButton';
 import { KeyPairModal } from '@/components/keyPairModal/KeyPairModal';
@@ -8,6 +9,7 @@ import { ConnectModal } from '@/components/connectModal/ConnectModal';
 import { getRandomKeyPair, isSecretKeyValid, getPublicKey } from '@/services/stellar';
 
 import { redirectToDashboard } from '@/utils/utils';
+import { logIn } from '@/storage/stateStorage/stateSlice';
 
 const Home: NextPage = () => {
   const [privateKey, setPrivateKey] = useState('');
@@ -15,6 +17,12 @@ const Home: NextPage = () => {
   const [showKeys, setShowKeys] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
   const [isKeyValid, setIsKeyValid] = useState(true);
+
+  const dispatch = useDispatch();
+
+  function logInUser(publicKey: string) {
+    dispatch(logIn({ id: publicKey }));
+  }
 
   function handleGenerateKeys() {
     const { publicKey, privateKey } = getRandomKeyPair();
