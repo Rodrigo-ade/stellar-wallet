@@ -21,10 +21,7 @@ export function NotificationModal({ notification, redirect = null }: INotificati
 
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto p-5">
         <div className="flex min-h-full items-end justify-center p-5 text-center sm:items-center sm:p-0">
-          <div
-            className="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
-            data-cy="notification-modal"
-          >
+          <div className="notification-modal relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <div className="bg-purple-highlight p-16">
               <div>
                 <div className="text-center">
