@@ -1,12 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectAccount } from '@/storage/stateStorage/stateSlice';
 
 import { NotificationModal } from '@/components/notificationModal/NotificationModal';
+import { Navbar } from '@/components/navbar/Navbar';
 
 import { redirectToIndex } from '@/utils/utils';
+import { logOut } from '@/storage/stateStorage/stateSlice';
 
 export default function Dashboard() {
   const account = useSelector(selectAccount);
+  
+  const dispatch = useDispatch();
+
+  function handleDisconnect() {
+    dispatch(logOut());
+  }
 
   if (!account) {
     return (
@@ -18,6 +26,7 @@ export default function Dashboard() {
   } else {
       return (
         <>
+          <Navbar handleDisconnect={handleDisconnect} />
           <div className="h-screen px-10 pt-5">
             <div>
               <p className="mb-3 text-3xl text-slate-200">Your Stellar Public Key</p>
