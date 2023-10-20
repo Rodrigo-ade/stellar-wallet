@@ -4,6 +4,7 @@ const DEFAULT_URL = Cypress.env('CYPRESS_BASE_URL');
 const INVALID_PRIVATE_KEY = 'GGAJOGAJOPAGJOPGAJOPGAJPAGPJOA08421';
 const VALID_PRIVATE_KEY = 'SAZ5WSF7U7KB43CAU4IU7TMYNLH67S3WN4I42GHLGHMOCJBC7CPLDHTV';
 const INVALID_KEY_MESSAGE = 'Invalid secret key';
+const NOTIFICATION_LOGGED_IN = 'Logged in, you will be redirected...';
 
 context('Index', () => {
   beforeEach(() => {
@@ -75,6 +76,13 @@ context('Index', () => {
     it('Should be closed when close button is clicked', () => {
       cy.get('@connectModal').find('.action-button').eq(1).click();
       cy.get('@connectModal').should('not.exist');
+    });
+
+    it('Should show notification before redirect', () => {
+      cy.get('@keyInput').clear();
+      cy.get('@keyInput').type(VALID_PRIVATE_KEY);
+      cy.get('@connectModalButton').click();
+      cy.get('.notification-modal').should('exist').should('contain.text', NOTIFICATION_LOGGED_IN);
     });
 
     it('Should be redirected when valid key is entered and connect is clicked', () => {
