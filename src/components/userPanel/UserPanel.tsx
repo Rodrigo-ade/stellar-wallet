@@ -1,8 +1,11 @@
+import { ActionButton } from '../actionButton/ActionButton';
+
 interface IUserPanelProps {
   lummensAmmount: number;
+  fundAccount: () => void;
 }
 
-export function UserPanel({ lummensAmmount }: IUserPanelProps) {
+export function UserPanel({ lummensAmmount, fundAccount }: IUserPanelProps) {
   return (
     <>
       <div>
@@ -32,6 +35,7 @@ export function UserPanel({ lummensAmmount }: IUserPanelProps) {
             This account is currently inactive. To activate it, fund your account for the first time
           </p>
         </div>
+        <ActionButton title="Fund Account" handleClick={() => fundAccount()}></ActionButton>
       </div>
     </>
   );
