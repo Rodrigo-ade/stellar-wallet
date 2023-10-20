@@ -69,8 +69,8 @@ export function ConnectModal({
               </div>
             </form>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
-              <ActionButton title="Connect" handleClick={() => handleConnect()} />
-              <ActionButton title="Close" handleClick={() => handleCloseConnectModal()} />
+              <ActionButton title="Connect" handleClick={handleConnect} />
+              <ActionButton title="Close" handleClick={handleCloseConnectModal} />
             </div>
           </div>
         </div>
