@@ -11,7 +11,9 @@ module.exports = defineConfig({
       require('@cypress/code-coverage/task')(on, config);
       return config;
     },
-    baseUrl: process.env.CYPRESS_BASE_URL,
     specPattern: 'cypress/tests/**/*.spec.{js,jsx,ts,tsx}',
   },
+  env: {
+    CYPRESS_BASE_URL: 'http://localhost:3000'
+  }
 });
