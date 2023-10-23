@@ -46,8 +46,6 @@ export function UserPanel({ lummensAmmount, fundAccount }: IUserPanelProps) {
             handleClick={() => handleFundAccount(publicKey, fundAccount)}
           ></ActionButton>
         </div>
-        <ActionButton title="Fund Account" handleClick={() => fundAccount()}></ActionButton>
-      </div>
       )}
     </>
   );
