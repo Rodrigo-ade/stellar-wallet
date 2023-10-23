@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAccount } from '@/storage/stateStorage/stateSlice';
 
@@ -9,15 +9,30 @@ import { Loading } from '@/components/loading/Loading';
 import { redirectToIndex } from '@/utils/utils';
 import { logOut } from '@/storage/stateStorage/stateSlice';
 
+import { IBalance, getAccountBalance } from '@/services/stellar';
+
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const account = useSelector(selectAccount);
+  const [balance, setBalance] = useState<IBalance[] | null>(null);
 
   const dispatch = useDispatch();
 
   function handleDisconnect() {
     dispatch(logOut());
   }
+
+  useEffect(() => {
+    async function handleGetBalance(publicKey: string) {
+      const balance = await getAccountBalance(publicKey);
+      setBalance(balance);
+      setLoading(false);
+    }
+
+    if (account != null) {
+      handleGetBalance(account.id);
+    }
+  }, [account]);
 
   if (!account) {
     return (
