@@ -30,6 +30,7 @@ context('Dashboard', () => {
       cy.get('.inactive-account').should('not.exist');
     });
   });
+
   describe('New Account', () => {
     before(() => {
       cy.visit(DEFAULT_URL);
@@ -40,6 +41,26 @@ context('Dashboard', () => {
           connect(tempKey);
         });
       cy.wait(TIMEOUT_MS);
+    });
+
+    it('Should have 0.00 as balance', () => {
+      cy.get('.balance-0').should('have.text', '0.00 Lumens (XLM)');
+    });
+
+    it('Should exist "Fund Account" button', () => {
+      cy.contains('Fund Account').should('exist');
+    });
+
+    it('Should Fund Account with 10000 XLM and show notifications', () => {
+      cy.contains('Fund Account').click();
+      cy.contains('Funding your account... please wait.').should('exist');
+      cy.wait(TIMEOUT_MS);
+      cy.contains('Your account was funded succesfully!').should('exist');
+      cy.get('.balance-0').should('have.text', '10000.00 Lumens (XLM)');
+    });
+
+    it('Should not exist "Fund Account" button after first funding', () => {
+      cy.contains('Fund Account').should('not.exist');
     });
   });
 });
