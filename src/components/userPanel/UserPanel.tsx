@@ -2,18 +2,37 @@ import { useState } from 'react';
 
 import { ActionButton } from '../actionButton/ActionButton';
 
+import { IBalance } from '@/services/stellar';
+
 interface IUserPanelProps {
-  lummensAmmount: number;
-  fundAccount: () => void;
+  publicKey: string;
+  fundAccount: (publicKey: string) => void;
+  balance: IBalance[] | null;
 }
 
-export function UserPanel({ lummensAmmount, fundAccount }: IUserPanelProps) {
+export function UserPanel({ fundAccount, balance, publicKey }: IUserPanelProps) {
   const [accountExists, setAccountExists] = useState(true);
+
+  const listedBalance = balance?.map((tempBalance) => {
+    const balance = Number(tempBalance.balance).toFixed(2);
+    const asset = tempBalance.asset === 'native' ? 'Lumens (XLM)' : tempBalance.asset;
+
+    if (accountExists && asset === 'Lumens (XLM)' && balance === '0.00') {
+      setAccountExists(false);
+    }
+
+    return (
+      <p className="text-3xl font-semibold text-slate-200" key={asset}>
+        {balance} {asset}
+      </p>
+    );
+  });
+
   return (
     <>
       <div>
         <p className="mb-3 text-3xl text-slate-200">Your balance</p>
-        <p className="text-3xl font-semibold text-slate-200">{lummensAmmount} Lumens (XLM)</p>
+        {listedBalance}
       </div>
       <hr className=" m-5 border-violet-strong" />
       {accountExists ? (
