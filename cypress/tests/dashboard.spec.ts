@@ -5,10 +5,10 @@ const WEALTHY_ACCOUNT_SECRET_KEY = 'SDCS77W6T4R3DIYBT6QA67LCKKM4HQ5TLEM3CCUO6UV5
 
 const connect = (key: string) => {
   cy.visit(DEFAULT_URL);
-    cy.get('.action-button').eq(1).click();
-    cy.get('.key-input').type(key);
-    cy.get('.action-button').eq(2).click();
-}
+  cy.get('.action-button').eq(1).click();
+  cy.get('.key-input').type(key);
+  cy.get('.action-button').eq(2).click();
+};
 
 context('Dashboard', () => {
   describe('Wealthy Account', () => {
@@ -16,12 +16,12 @@ context('Dashboard', () => {
       connect(WEALTHY_ACCOUNT_SECRET_KEY);
       cy.wait(750);
     });
-    
+
     it('Should have 10000.00 as balance', () => {
       cy.get('.balance-0').should('have.text', '10000.00 Lumens (XLM)');
     });
 
-    it('Should not exist "Fund Account" button', () =>  {
+    it('Should not exist "Fund Account" button', () => {
       cy.contains('Fund Account').should('not.exist');
     });
 

@@ -27,7 +27,7 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
     }
 
     return (
-      <p className={ `balance-${index} text-3xl font-semibold text-slate-200`} key={asset}>
+      <p className={`balance-${index} text-3xl font-semibold text-slate-200`} key={asset}>
         {balance} {asset}
       </p>
     );
