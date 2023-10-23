@@ -28,6 +28,10 @@ export function UserPanel({ fundAccount, balance, publicKey }: IUserPanelProps) 
     );
   });
 
+  function handleFundAccount(publicKey: string, fundAccount: (publicKey: string) => void) {
+    fundAccount(publicKey);
+  }
+
   return (
     <>
       <div>
