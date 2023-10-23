@@ -6,11 +6,12 @@ import { IBalance } from '@/services/stellar';
 
 interface IUserPanelProps {
   publicKey: string;
-  fundAccount: (publicKey: string) => void;
+  fundAccount: (publicKey: string) => Promise<boolean>;
   balance: IBalance[] | null;
+  setFunded: (isFunding: boolean) => void;
 }
 
-export function UserPanel({ fundAccount, balance, publicKey }: IUserPanelProps) {
+export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserPanelProps) {
   const [accountExists, setAccountExists] = useState(true);
 
   const listedBalance = balance?.map((tempBalance) => {
