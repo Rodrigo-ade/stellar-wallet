@@ -33,8 +33,21 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
     );
   });
 
-  function handleFundAccount(publicKey: string, fundAccount: (publicKey: string) => void) {
-    fundAccount(publicKey);
+  async function handleFundAccount(publicKey: string, fundAccount: (publicKey: string) => Promise<boolean>) {
+    const NOTIFICATION_DELAY = 2000;
+
+    setNotification({ isSuccess: true, message: 'Funding your account... please wait.' });
+    const fundSuccess = await fundAccount(publicKey);
+    if (fundSuccess) {
+      setNotification({ isSuccess: true, message: 'Your account was funded succesfully!' });
+    } else {
+      setNotification({ isSuccess: false, message: 'Error funding your account... try again later' });
+    }
+
+    setTimeout(() => {
+      setNotification(null);
+      setFunded(true);
+    }, NOTIFICATION_DELAY);
   }
 
   return (
