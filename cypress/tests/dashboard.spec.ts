@@ -2,6 +2,7 @@
 
 const DEFAULT_URL = Cypress.env('CYPRESS_BASE_URL');
 const WEALTHY_ACCOUNT_SECRET_KEY = 'SDCS77W6T4R3DIYBT6QA67LCKKM4HQ5TLEM3CCUO6UV5XBNWI7LEWWSF';
+const TIMEOUT_MS = 1200;
 
 const connect = (key: string) => {
   cy.visit(DEFAULT_URL);
@@ -14,7 +15,7 @@ context('Dashboard', () => {
   describe('Wealthy Account', () => {
     before(() => {
       connect(WEALTHY_ACCOUNT_SECRET_KEY);
-      cy.wait(750);
+      cy.wait(TIMEOUT_MS);
     });
 
     it('Should have 10000.00 as balance', () => {
