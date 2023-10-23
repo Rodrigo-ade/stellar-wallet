@@ -30,4 +30,16 @@ context('Dashboard', () => {
       cy.get('.inactive-account').should('not.exist');
     });
   });
+  describe('New Account', () => {
+    before(() => {
+      cy.visit(DEFAULT_URL);
+      cy.get('.action-button').eq(0).click();
+      cy.get('.private-key')
+        .invoke('text')
+        .then((tempKey) => {
+          connect(tempKey);
+        });
+      cy.wait(TIMEOUT_MS);
+    });
+  });
 });
