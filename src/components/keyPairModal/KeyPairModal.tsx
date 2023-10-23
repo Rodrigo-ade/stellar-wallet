@@ -73,8 +73,8 @@ export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey
               </div>
             </div>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
-              <ActionButton title={copyKeysButtonText} handleClick={() => handleCopyKeys()} />
-              <ActionButton title="Close" handleClick={() => handleCloseKeyPairModal()} />
+              <ActionButton title={copyKeysButtonText} handleClick={handleCopyKeys}/>
+              <ActionButton title="Close" handleClick={handleCloseKeyPairModal} />
             </div>
           </div>
         </div>
