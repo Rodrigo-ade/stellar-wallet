@@ -62,7 +62,7 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
       {accountExists ? (
         ''
       ) : (
-        <div className="text-center">
+        <div className="inactive-account text-center">
           <div className="flex justify-center border border-violet-strong bg-violet-strong bg-opacity-20 p-5">
             <p className="flex font-semibold text-red-500 ">
               <span>
