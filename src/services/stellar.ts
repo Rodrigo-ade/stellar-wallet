@@ -5,6 +5,11 @@ interface KeyPair {
   privateKey: string;
 }
 
+export interface IBalance {
+  asset: string;
+  balance: string;
+}
+
 const server = new Server('https://horizon-testnet.stellar.org');
 
 export function getRandomKeyPair(): KeyPair {
@@ -20,11 +25,6 @@ export function isSecretKeyValid(secretKey: string): boolean {
 
 export function getPublicKey(privateKey: string): string {
   return Keypair.fromSecret(privateKey).publicKey();
-}
-
-export interface IBalance {
-  asset: string;
-  balance: string;
 }
 
 export async function getAccountBalance(publicKey: string) {
