@@ -27,7 +27,6 @@ context('Dashboard', () => {
 
     it('Should not exist "Inactive Account" panel', () => {
       cy.get('.inactive-account').should('not.exist');
-    })
-
+    });
   });
 });
