@@ -29,16 +29,17 @@ export interface IBalance {
 
 export async function getAccountBalance(publicKey: string) {
   let balance: IBalance[];
-  try{
+  try {
     const account = await server.loadAccount(publicKey);
-    balance = account.balances.map((tempBalance) => ({asset: tempBalance.asset_type, balance: tempBalance.balance}));
-  } catch(e) {
+    balance = account.balances.map((tempBalance) => ({ asset: tempBalance.asset_type, balance: tempBalance.balance }));
+  } catch (e) {
     balance = [
       {
-        "asset": "native",
-        "balance": "0"
-      }
+        asset: 'native',
+        balance: '0',
+      },
     ];
   }
   return balance;
 }
+
