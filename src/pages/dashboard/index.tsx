@@ -5,11 +5,12 @@ import { selectAccount } from '@/storage/stateStorage/stateSlice';
 import { NotificationModal } from '@/components/notificationModal/NotificationModal';
 import { Navbar } from '@/components/navbar/Navbar';
 import { Loading } from '@/components/loading/Loading';
+import { UserPanel } from '@/components/userPanel/UserPanel';
 
 import { redirectToIndex } from '@/utils/utils';
 import { logOut } from '@/storage/stateStorage/stateSlice';
 
-import { IBalance, getAccountBalance } from '@/services/stellar';
+import { IBalance, getAccountBalance, fundAccount } from '@/services/stellar';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
@@ -56,7 +57,7 @@ export default function Dashboard() {
               <Loading title="Loading your account information..." />
             </div>
           ) : (
-            ''
+            <UserPanel publicKey={account.id} balance={balance} fundAccount={fundAccount} />
           )}
         </div>
       </>
