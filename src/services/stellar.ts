@@ -1,9 +1,11 @@
-import { Keypair, StrKey } from 'stellar-sdk';
+import { Keypair, StrKey, Server } from 'stellar-sdk';
 
 interface KeyPair {
   publicKey: string;
   privateKey: string;
 }
+
+const server = new Server('https://horizon-testnet.stellar.org');
 
 export function getRandomKeyPair(): KeyPair {
   const keyPair = Keypair.random();
@@ -18,4 +20,25 @@ export function isSecretKeyValid(secretKey: string): boolean {
 
 export function getPublicKey(privateKey: string): string {
   return Keypair.fromSecret(privateKey).publicKey();
+}
+
+export interface IBalance {
+  asset: string;
+  balance: string;
+}
+
+export async function getAccountBalance(publicKey: string) {
+  let balance: IBalance[];
+  try{
+    const account = await server.loadAccount(publicKey);
+    balance = account.balances.map((tempBalance) => ({asset: tempBalance.asset_type, balance: tempBalance.balance}));
+  } catch(e) {
+    balance = [
+      {
+        "asset": "native",
+        "balance": "0"
+      }
+    ];
+  }
+  return balance;
 }
