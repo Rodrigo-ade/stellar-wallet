@@ -27,6 +27,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function handleGetBalance(publicKey: string) {
+      setLoading(true);
       const balance = await getAccountBalance(publicKey);
       setBalance(balance);
       setLoading(false);
