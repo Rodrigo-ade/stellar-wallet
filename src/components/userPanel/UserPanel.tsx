@@ -18,7 +18,7 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
 
-  const listedBalance = balance?.map((tempBalance) => {
+  const listedBalance = balance?.map((tempBalance, index) => {
     const balance = Number(tempBalance.balance).toFixed(2);
     const asset = tempBalance.asset === 'native' ? 'Lumens (XLM)' : tempBalance.asset;
 
@@ -27,7 +27,7 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
     }
 
     return (
-      <p className="text-3xl font-semibold text-slate-200" key={asset}>
+      <p className={ `balance-${index} text-3xl font-semibold text-slate-200`} key={asset}>
         {balance} {asset}
       </p>
     );
