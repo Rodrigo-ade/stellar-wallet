@@ -17,6 +17,8 @@ export default function Dashboard() {
   const account = useSelector(selectAccount);
   const [balance, setBalance] = useState<IBalance[] | null>(null);
 
+  const [funded, setFunded] = useState(false);
+
   const dispatch = useDispatch();
 
   function handleDisconnect() {
@@ -33,7 +35,7 @@ export default function Dashboard() {
     if (account != null) {
       handleGetBalance(account.id);
     }
-  }, [account]);
+  }, [account, funded]);
 
   if (!account) {
     return (
@@ -57,7 +59,7 @@ export default function Dashboard() {
               <Loading title="Loading your account information..." />
             </div>
           ) : (
-            <UserPanel publicKey={account.id} balance={balance} fundAccount={fundAccount} />
+            <UserPanel publicKey={account.id} balance={balance} fundAccount={fundAccount} setFunded={setFunded} />
           )}
         </div>
       </>
