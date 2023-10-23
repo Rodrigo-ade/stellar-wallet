@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
 import { ActionButton } from '../actionButton/ActionButton';
+import { NotificationModal } from '../notificationModal/NotificationModal';
 
 import { IBalance } from '@/services/stellar';
+
+import { Notification } from '@/entities/Notification';
 
 interface IUserPanelProps {
   publicKey: string;
@@ -13,6 +16,7 @@ interface IUserPanelProps {
 
 export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserPanelProps) {
   const [accountExists, setAccountExists] = useState(true);
+  const [notification, setNotification] = useState<Notification | null>(null);
 
   const listedBalance = balance?.map((tempBalance) => {
     const balance = Number(tempBalance.balance).toFixed(2);
@@ -35,6 +39,8 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
 
   return (
     <>
+      {notification ? <NotificationModal notification={notification}></NotificationModal> : ''}
+
       <div>
         <p className="mb-3 text-3xl text-slate-200">Your balance</p>
         {listedBalance}
