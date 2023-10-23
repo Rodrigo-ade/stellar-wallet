@@ -11,6 +11,7 @@ export interface IBalance {
 }
 
 const server = new Server('https://horizon-testnet.stellar.org');
+const FRIENDBOT_FUND_URL = `https://friendbot.stellar.org`;
 
 export function getRandomKeyPair(): KeyPair {
   const keyPair = Keypair.random();
@@ -43,3 +44,7 @@ export async function getAccountBalance(publicKey: string) {
   return balance;
 }
 
+export async function fundAccount(publicKey: string) {
+  const { ok } = await fetch(`${FRIENDBOT_FUND_URL}?addr=${publicKey}`);
+  return ok;
+}
