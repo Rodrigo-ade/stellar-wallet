@@ -15,6 +15,5 @@ module.exports = defineConfig({
   },
   env: {
     CYPRESS_BASE_URL: 'http://localhost:3000/',
-    CYPRESS_DASHBOARD_URL: 'http://localhost:3000/dashboard',
   }
 });
