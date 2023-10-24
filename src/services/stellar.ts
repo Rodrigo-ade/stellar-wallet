@@ -28,20 +28,13 @@ export function getPublicKey(privateKey: string): string {
   return Keypair.fromSecret(privateKey).publicKey();
 }
 
-export async function getAccountBalance(publicKey: string) {
-  let balance: IBalance[];
+export async function getAccount(publicKey: string) {
   try {
     const account = await server.loadAccount(publicKey);
-    balance = account.balances.map((tempBalance) => ({ asset: tempBalance.asset_type, balance: tempBalance.balance }));
+    return account;
   } catch (e) {
-    balance = [
-      {
-        asset: 'native',
-        balance: '0',
-      },
-    ];
+    return new Error('Stellar Api Error');
   }
-  return balance;
 }
 
 export async function fundAccount(publicKey: string) {
