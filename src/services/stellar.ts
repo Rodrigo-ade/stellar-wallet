@@ -5,11 +5,6 @@ interface KeyPair {
   privateKey: string;
 }
 
-export interface IBalance {
-  asset: string;
-  balance: string;
-}
-
 const server = new Server('https://horizon-testnet.stellar.org');
 const FRIENDBOT_FUND_URL = `https://friendbot.stellar.org`;
 
