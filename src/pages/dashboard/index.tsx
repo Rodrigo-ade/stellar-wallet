@@ -12,7 +12,7 @@ import { logOut } from '@/storage/stateStorage/stateSlice';
 
 import { IBalance, getAccountBalance, fundAccount } from '@/services/stellar';
 
-export default function Dashboard() {
+export default function Dashboard(): React.ReactElement {
   const [loading, setLoading] = useState(true);
   const account = useSelector(selectAccount);
   const [balance, setBalance] = useState<IBalance[] | null>(null);
