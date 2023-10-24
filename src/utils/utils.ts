@@ -51,6 +51,8 @@ export async function getAccount(publicKey: string) {
       to: tempPayment.to,
       asset_code: tempPayment.asset_code,
     }));
+
+    payments = payments.filter((tempB) => tempB.type != "create_account");
   }
 
   return { payments, balance };
