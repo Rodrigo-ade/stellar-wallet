@@ -2,7 +2,7 @@ interface ILoadingProps {
   title?: string;
 }
 
-export function Loading({ title }: ILoadingProps) {
+export function Loading({ title }: ILoadingProps): React.ReactElement {
   return (
     <>
       <div className="m-5 grid justify-center text-center">

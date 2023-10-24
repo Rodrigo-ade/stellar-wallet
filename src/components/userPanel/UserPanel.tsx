@@ -14,7 +14,7 @@ interface IUserPanelProps {
   setFunded: (isFunding: boolean) => void;
 }
 
-export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserPanelProps) {
+export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserPanelProps): React.ReactElement {
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
 

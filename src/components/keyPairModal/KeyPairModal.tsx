@@ -9,7 +9,7 @@ export interface IKeyPairModalProps {
   setPublicKey: (publicKey: string) => void;
 }
 
-export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey, setPublicKey }: IKeyPairModalProps) {
+export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey, setPublicKey }: IKeyPairModalProps): React.ReactElement {
   const [copyKeysButtonText, setCopyKeysButtonText] = useState<'Copy Keys' | 'Copied!'>('Copy Keys');
 
   function handleCopyKeys() {
