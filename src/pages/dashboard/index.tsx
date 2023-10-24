@@ -10,12 +10,14 @@ import { UserPanel } from '@/components/userPanel/UserPanel';
 import { redirectToIndex } from '@/utils/utils';
 import { logOut } from '@/storage/stateStorage/stateSlice';
 
-import { IBalance, getAccountBalance, fundAccount } from '@/services/stellar';
+import { fundAccount } from '@/services/stellar';
+import { IBalance, getAccount, IPayment } from '@/utils/utils';
 
 export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const account = useSelector(selectAccount);
   const [balance, setBalance] = useState<IBalance[] | null>(null);
+  const [payments, setPayments] = useState< IPayment[] | null>(null);
 
   const [funded, setFunded] = useState(false);
 
@@ -26,15 +28,16 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    async function handleGetBalance(publicKey: string) {
+    async function handleGetAccount(publicKey: string) {
       setLoading(true);
-      const balance = await getAccountBalance(publicKey);
+      const { balance, payments } = await getAccount(publicKey);
+      setPayments(payments);
       setBalance(balance);
       setLoading(false);
     }
 
     if (account != null) {
-      handleGetBalance(account.id);
+      handleGetAccount(account.id);
     }
   }, [account, funded]);
 
