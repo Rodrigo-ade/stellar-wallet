@@ -20,9 +20,9 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
 
   const listedBalance = balance?.map((tempBalance, index) => {
     const balance = Number(tempBalance.balance).toFixed(2);
-    if (accountExists && asset === 'Lumens (XLM)' && balance === '0.00') {
     const asset = tempBalance.asset;
     
+    if (accountExists && asset === 'XLM' && balance === '0.00') {
       setAccountExists(false);
     }
 
