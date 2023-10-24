@@ -1,4 +1,4 @@
-export interface ILoadingProps {
+interface ILoadingProps {
   title?: string;
 }
 
