@@ -21,7 +21,7 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded, payments
 
   const listedPayments = payments?.map((tempPayment, index) => {
     return (
-      <div key={`payment-${index}`} className='text-white m-3 text-center border-violet-strong bg-violet-strong bg-opacity-20 p-1 justify-center'>
+      <div key={`payment-${index}`} className='text-white m-3 text-center border-violet-strong bg-violet-strong bg-opacity-20 p-1 justify-center break-words'>
         <p>
           <span className='text-slate-400'>{tempPayment.type}</span>: 
           (<span className='text-yellow-400'>{tempPayment.asset_code}</span> - <span className='text-green-400'> {tempPayment.ammount}</span>)
