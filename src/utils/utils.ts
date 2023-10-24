@@ -5,6 +5,14 @@ export interface IBalance {
   balance: string;
 }
 
+export interface IPayment {
+  ammount: string,
+  type: string,
+  from: string,
+  to: string,
+  asset_code: string | undefined,
+  date: string,
+}
 
 export function redirectToDashboard() {
   Router.push({ pathname: '/dashboard' });
