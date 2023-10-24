@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ActionButton } from '../actionButton/ActionButton';
 import { NotificationModal } from '../notificationModal/NotificationModal';
 
-import { IBalance } from '@/services/stellar';
+import { IBalance, IPayment } from '@/services/stellar';
 
 import { Notification } from '@/entities/Notification';
 
@@ -12,9 +12,10 @@ interface IUserPanelProps {
   fundAccount: (publicKey: string) => Promise<boolean>;
   balance: IBalance[] | null;
   setFunded: (isFunding: boolean) => void;
+  payments: IPayment[] | null;
 }
 
-export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserPanelProps) {
+export function UserPanel({ fundAccount, balance, publicKey, setFunded, payments }: IUserPanelProps) {
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
 
