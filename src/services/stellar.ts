@@ -1,5 +1,8 @@
 import { Keypair, StrKey, Server } from 'stellar-sdk';
 
+const STELLAR_SERVER = process.env.TESTNET_URL;
+const FRIENDBOT_FUND_URL = process.env.FRIENDBOT_URL;
+
 interface KeyPair {
   publicKey: string;
   privateKey: string;
@@ -10,8 +13,7 @@ export interface IBalance {
   balance: string;
 }
 
-const server = new Server('https://horizon-testnet.stellar.org');
-const FRIENDBOT_FUND_URL = `https://friendbot.stellar.org`;
+const server = new Server(STELLAR_SERVER);
 
 export function getRandomKeyPair(): KeyPair {
   const keyPair = Keypair.random();
