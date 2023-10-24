@@ -1,6 +1,6 @@
 import { ActionButton } from '../actionButton/ActionButton';
 
-export interface INavbarProps {
+interface INavbarProps {
   handleDisconnect: () => void;
 }
 
