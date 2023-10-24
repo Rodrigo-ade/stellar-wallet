@@ -63,7 +63,7 @@ export default function Dashboard() {
               <Loading title="Loading your account information..." />
             </div>
           ) : (
-            <UserPanel publicKey={account.id} balance={balance} fundAccount={fundAccount} setFunded={setFunded} />
+            <UserPanel publicKey={account.id} balance={balance} payments={payments} fundAccount={fundAccount} setFunded={setFunded} />
           )}
         </div>
       </>
