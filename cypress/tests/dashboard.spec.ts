@@ -56,6 +56,14 @@ context('Dashboard', () => {
       cy.contains('Fund Account').should('exist');
     });
 
+    it('Should show "No payments found"', () => {
+      cy.get('.no-payments').should('have.text', 'No Payments found...')
+    })
+
+    it('Should show 1 balance at least', () => {
+      cy.get('.balance').should('have.length.at.least', 1);
+    });
+
     it('Should Fund Account with 10000 XLM and show notifications', () => {
       cy.contains('Fund Account').click();
       cy.contains('Funding your account... please wait.').should('exist');
