@@ -36,6 +36,11 @@ export default function Dashboard(): React.ReactElement {
     if (account != null) {
       handleGetBalance(account.id);
     }
+
+    return () => {
+      setLoading(true);
+      setBalance(null);
+    }
   }, [account, funded]);
 
   if (!account) {
