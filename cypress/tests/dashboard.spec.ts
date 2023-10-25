@@ -12,7 +12,7 @@ const connect = (key: string) => {
 };
 
 context('Dashboard', () => {
-  describe('Wealthy Account', () => {
+  describe('Funded Account', () => {
     before(() => {
       connect(FUNDED_ACCOUNT_SECRET_KEY);
       cy.wait(TIMEOUT_MS);
