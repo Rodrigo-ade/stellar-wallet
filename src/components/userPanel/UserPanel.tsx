@@ -28,7 +28,7 @@ export function UserPanel({
     return (
       <div
         key={`payment-${index}`}
-        className="m-3 justify-center break-words border-violet-strong bg-violet-strong bg-opacity-20 p-1 text-center text-white"
+        className="payment m-3 justify-center break-words border-violet-strong bg-violet-strong bg-opacity-20 p-1 text-center text-white"
       >
         <p>
           <span className="text-slate-400">{tempPayment.type}</span>: (
@@ -52,7 +52,7 @@ export function UserPanel({
     }
 
     return (
-      <p className={`balance-${index} text-3xl font-semibold text-slate-200`} key={asset}>
+      <p className={`balance-${index} balance text-3xl font-semibold text-slate-200`} key={asset}>
         {balance} {asset}
       </p>
     );
@@ -120,7 +120,7 @@ export function UserPanel({
         {listedPayments && listedPayments?.length > 0 ? (
           listedPayments
         ) : (
-          <p className="text-xl text-slate-400">No Payments found...</p>
+          <p className="no-payments text-xl text-slate-400">No Payments found...</p>
         )}
       </div>
     </>
