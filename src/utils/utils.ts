@@ -7,12 +7,12 @@ export interface IBalance {
 }
 
 export interface IPayment {
-  ammount: string,
-  type: string,
-  from: string,
-  to: string,
-  asset_code: string | undefined,
-  date: string,
+  ammount: string;
+  type: string;
+  from: string;
+  to: string;
+  asset_code: string | undefined;
+  date: string;
 }
 
 export function redirectToDashboard() {
@@ -29,7 +29,7 @@ export async function getAccount(publicKey: string) {
 
   const account = await getAccountService(publicKey);
 
-  if(account instanceof Error){
+  if (account instanceof Error) {
     payments = [];
     balance = [
       {
@@ -37,13 +37,15 @@ export async function getAccount(publicKey: string) {
         balance: '0',
       },
     ];
-  }else {
-    balance = account.balances.filter((tempB) => Number(tempB.balance) > 0).map((tempBalance) => ({
-      asset: tempBalance.asset_type === 'native' ? 'XLM' : tempBalance.asset_code, 
-      balance: tempBalance.balance,
-    }));
+  } else {
+    balance = account.balances
+      .filter((tempB) => Number(tempB.balance) > 0)
+      .map((tempBalance) => ({
+        asset: tempBalance.asset_type === 'native' ? 'XLM' : tempBalance.asset_code,
+        balance: tempBalance.balance,
+      }));
 
-    payments = (await account.payments({order:'desc'})).records.map((tempPayment) => ({
+    payments = (await account.payments({ order: 'desc' })).records.map((tempPayment) => ({
       ammount: tempPayment.amount,
       type: tempPayment.type.toString(),
       date: tempPayment.created_at,
@@ -52,7 +54,7 @@ export async function getAccount(publicKey: string) {
       asset_code: tempPayment.asset_code,
     }));
 
-    payments = payments.filter((tempB) => tempB.type != "create_account");
+    payments = payments.filter((tempB) => tempB.type != 'create_account');
   }
 
   return { payments, balance };

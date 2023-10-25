@@ -17,7 +17,7 @@ export default function Dashboard(): React.ReactElement {
   const [loading, setLoading] = useState(true);
   const account = useSelector(selectAccount);
   const [balance, setBalance] = useState<IBalance[] | null>(null);
-  const [payments, setPayments] = useState< IPayment[] | null>(null);
+  const [payments, setPayments] = useState<IPayment[] | null>(null);
 
   const [funded, setFunded] = useState(false);
 
@@ -69,7 +69,13 @@ export default function Dashboard(): React.ReactElement {
               <Loading title="Loading your account information..." />
             </div>
           ) : (
-            <UserPanel publicKey={account.id} balance={balance} payments={payments} fundAccount={fundAccount} setFunded={setFunded} />
+            <UserPanel
+              publicKey={account.id}
+              balance={balance}
+              payments={payments}
+              fundAccount={fundAccount}
+              setFunded={setFunded}
+            />
           )}
         </div>
       </>

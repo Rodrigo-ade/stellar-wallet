@@ -14,19 +14,31 @@ interface IUserPanelProps {
   setFunded: (isFunding: boolean) => void;
 }
 
-export function UserPanel({ fundAccount, balance, payments, publicKey, setFunded }: IUserPanelProps): React.ReactElement {
+export function UserPanel({
+  fundAccount,
+  balance,
+  payments,
+  publicKey,
+  setFunded,
+}: IUserPanelProps): React.ReactElement {
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
 
   const listedPayments = payments?.map((tempPayment, index) => {
     return (
-      <div key={`payment-${index}`} className='text-white m-3 text-center border-violet-strong bg-violet-strong bg-opacity-20 p-1 justify-center break-words'>
+      <div
+        key={`payment-${index}`}
+        className="m-3 justify-center break-words border-violet-strong bg-violet-strong bg-opacity-20 p-1 text-center text-white"
+      >
         <p>
-          <span className='text-slate-400'>{tempPayment.type}</span>: 
-          (<span className='text-yellow-400'>{tempPayment.asset_code}</span> - <span className='text-green-400'> {tempPayment.ammount}</span>)
+          <span className="text-slate-400">{tempPayment.type}</span>: (
+          <span className="text-yellow-400">{tempPayment.asset_code}</span> -{' '}
+          <span className="text-green-400"> {tempPayment.ammount}</span>)
         </p>
-        <p><span className='text-slate-400'>To:</span> {tempPayment.to}</p>
-        <span className='text-slate-400'> Date:</span> {tempPayment.date.split('T')[0]}
+        <p>
+          <span className="text-slate-400">To:</span> {tempPayment.to}
+        </p>
+        <span className="text-slate-400"> Date:</span> {tempPayment.date.split('T')[0]}
       </div>
     );
   });
@@ -34,7 +46,7 @@ export function UserPanel({ fundAccount, balance, payments, publicKey, setFunded
   const listedBalance = balance?.map((tempBalance, index) => {
     const balance = Number(tempBalance.balance).toFixed(2);
     const asset = tempBalance.asset === 'native' ? 'Lumens (XLM)' : tempBalance.asset;
-    const EMPTY_BALANCE = "0.00";
+    const EMPTY_BALANCE = '0.00';
     if (accountExists && asset === 'XLM' && balance === EMPTY_BALANCE) {
       setAccountExists(false);
     }
@@ -103,9 +115,13 @@ export function UserPanel({ fundAccount, balance, payments, publicKey, setFunded
           ></ActionButton>
         </div>
       )}
-      <div className='mt-3'>
+      <div className="mt-3">
         <p className="mb-3 text-3xl text-slate-200">Your Payments</p>
-        {listedPayments && listedPayments?.length > 0 ? listedPayments : <p className='text-slate-400 text-xl'>No Payments found...</p>}
+        {listedPayments && listedPayments?.length > 0 ? (
+          listedPayments
+        ) : (
+          <p className="text-xl text-slate-400">No Payments found...</p>
+        )}
       </div>
     </>
   );
