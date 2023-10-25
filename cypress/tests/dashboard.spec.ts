@@ -33,7 +33,6 @@ context('Dashboard', () => {
     it('Should have at least 1 payment', () => {
       cy.get('.payment').should('have.length.at.least', 1);
     });
-
   });
 
   describe('New Account', () => {
@@ -57,8 +56,8 @@ context('Dashboard', () => {
     });
 
     it('Should show "No payments found"', () => {
-      cy.get('.no-payments').should('have.text', 'No Payments found...')
-    })
+      cy.get('.no-payments').should('have.text', 'No Payments found...');
+    });
 
     it('Should show 1 balance at least', () => {
       cy.get('.balance').should('have.length.at.least', 1);
