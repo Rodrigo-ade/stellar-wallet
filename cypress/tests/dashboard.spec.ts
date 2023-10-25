@@ -29,6 +29,11 @@ context('Dashboard', () => {
     it('Should not exist "Inactive Account" panel', () => {
       cy.get('.inactive-account').should('not.exist');
     });
+
+    it('Should have at least 1 payment', () => {
+      cy.get('.payment').should('have.length.at.least', 1);
+    });
+
   });
 
   describe('New Account', () => {
