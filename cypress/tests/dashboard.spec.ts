@@ -19,7 +19,7 @@ context('Dashboard', () => {
     });
 
     it('Should have 10000.00 as balance', () => {
-      cy.get('.balance-0').should('have.text', '10000.00 Lumens (XLM)');
+      cy.get('.balance-0').should('have.text', '10000.00 XLM');
     });
 
     it('Should not exist "Fund Account" button', () => {
@@ -44,7 +44,7 @@ context('Dashboard', () => {
     });
 
     it('Should have 0.00 as balance', () => {
-      cy.get('.balance-0').should('have.text', '0.00 Lumens (XLM)');
+      cy.get('.balance-0').should('have.text', '0.00 XLM');
     });
 
     it('Should exist "Fund Account" button', () => {
@@ -56,7 +56,7 @@ context('Dashboard', () => {
       cy.contains('Funding your account... please wait.').should('exist');
       cy.wait(TIMEOUT_MS);
       cy.contains('Your account was funded succesfully!').should('exist');
-      cy.get('.balance-0').should('have.text', '10000.00 Lumens (XLM)');
+      cy.get('.balance-0').should('have.text', '10000.00 XLM');
     });
 
     it('Should not exist "Fund Account" button after first funding', () => {
