@@ -9,7 +9,7 @@ export function NotificationModal({ notification, redirect = null }: INotificati
   const { isSuccess, message } = notification;
 
   if (redirect) {
-    const REDIRECT_TIMEOUT = 3500;
+    const REDIRECT_TIMEOUT = 2500;
     setTimeout(() => {
       redirect();
     }, REDIRECT_TIMEOUT);
