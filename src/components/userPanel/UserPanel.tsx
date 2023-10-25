@@ -32,7 +32,7 @@ export function UserPanel({
       >
         <p>
           <span className="text-slate-400">{tempPayment.type}</span>: (
-          <span className="text-yellow-400">{tempPayment.asset_code}</span> -{' '}
+          <span className="text-yellow-400">{tempPayment.asset_code ? tempPayment.asset_code : 'XML'}</span> -{' '}
           <span className="text-green-400"> {tempPayment.ammount}</span>)
         </p>
         <p>
