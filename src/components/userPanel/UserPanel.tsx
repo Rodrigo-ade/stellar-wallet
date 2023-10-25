@@ -22,8 +22,7 @@ export function UserPanel({ fundAccount, balance, publicKey, setFunded }: IUserP
     const balance = Number(tempBalance.balance).toFixed(2);
     const asset = tempBalance.asset === 'native' ? 'Lumens (XLM)' : tempBalance.asset;
     const EMPTY_BALANCE = "0.00";
-
-    if (accountExists && asset === 'Lumens (XLM)' && balance === EMPTY_BALANCE) {
+    if (accountExists && asset === 'XLM' && balance === EMPTY_BALANCE) {
       setAccountExists(false);
     }
 
