@@ -43,7 +43,8 @@ export default function Dashboard(): React.ReactElement {
     return () => {
       setLoading(true);
       setBalance(null);
-    }
+      setPayments(null);
+    };
   }, [account, funded]);
 
   if (!account) {
