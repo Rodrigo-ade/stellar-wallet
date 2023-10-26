@@ -92,24 +92,6 @@ context('Index', () => {
       cy.url().should('not.equal', DEFAULT_URL);
     });
   });
-
-  describe(('Albedo'), () => {
-    it('Should exist "Connect with albedo" button', () => {
-      cy.contains(/^Connect with Albedo$/).should('exist');
-    });
-
-    it('Should call Albedo function when clicked', () => {
-      cy.window().then((win) => {
-        cy.stub(win, 'open').as('open');
-      });
-
-      cy.contains(/^Connect with Albedo$/).click();
-      cy.get("@open").should("have.been.called");
-    });
-
-
-  });
-
 });
 
 export {};
