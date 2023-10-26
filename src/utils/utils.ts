@@ -39,11 +39,6 @@ export async function getAccount(publicKey: string) {
     ];
   } else {
     const { balances } = account;
-    balances.filter((tempB) => Number(tempB.balance) > 0)
-      .map((tempBalance) => ({
-        asset: tempBalance.asset_type === 'native' ? 'XLM' : tempBalance.asset_code,
-        balance: tempBalance.balance,
-      }));
 
     payments = (await account.payments({ order: 'desc' })).records.map((tempPayment) => ({
       ammount: tempPayment.amount,
@@ -53,6 +48,15 @@ export async function getAccount(publicKey: string) {
       to: tempPayment.to,
       asset_code: tempPayment.asset_code,
     }));
+    balance = balances.filter((tempB) => Number(tempB.balance) > 0)
+      .map((tempBalance) => {
+        const {asset_type, asset_code, balance} = tempBalance;
+        
+        return {
+          asset: asset_type === 'native' ? 'XLM' : asset_code,
+          balance: balance,
+        }
+      });
 
     payments = payments.filter((tempB) => tempB.type != 'create_account');
   }
