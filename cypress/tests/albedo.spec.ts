@@ -13,5 +13,13 @@ context('Index', () => {
       cy.get('@albedoButton').should('exist');
     });
 
+    it('Should call Albedo when clicked', () => {
+      cy.window().then((win) => {
+        cy.stub(win, 'open').as('openAlbedo');
+      });
+
+      cy.get('@albedoButton').click();
+      cy.get('@openAlbedo').should('have.been.called');
+    });
   });
 });
