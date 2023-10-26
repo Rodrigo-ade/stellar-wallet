@@ -38,8 +38,8 @@ export async function getAccount(publicKey: string) {
       },
     ];
   } else {
-    balance = account.balances
-      .filter((tempB) => Number(tempB.balance) > 0)
+    const { balances } = account;
+    balances.filter((tempB) => Number(tempB.balance) > 0)
       .map((tempBalance) => ({
         asset: tempBalance.asset_type === 'native' ? 'XLM' : tempBalance.asset_code,
         balance: tempBalance.balance,
