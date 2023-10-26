@@ -39,15 +39,6 @@ export async function getAccount(publicKey: string) {
     ];
   } else {
     const { balances } = account;
-
-    payments = (await account.payments({ order: 'desc' })).records.map((tempPayment) => ({
-      ammount: tempPayment.amount,
-      type: tempPayment.type.toString(),
-      date: tempPayment.created_at,
-      from: tempPayment.from,
-      to: tempPayment.to,
-      asset_code: tempPayment.asset_code,
-    }));
     balance = balances.filter((tempB) => Number(tempB.balance) > 0)
       .map((tempBalance) => {
         const {asset_type, asset_code, balance} = tempBalance;
@@ -57,6 +48,27 @@ export async function getAccount(publicKey: string) {
           balance: balance,
         }
       });
+
+
+    payments = (await account.payments({ order: 'desc' })).records.map((tempPayment) => {
+      const {
+        amount,
+        type,
+        created_at,
+        from,
+        to,
+        asset_code,
+      } = tempPayment;
+
+      return ({
+        amount,
+        type: type.toString(),
+        date: created_at,
+        from: from,
+        to,
+        asset_code,
+      });
+    });
 
     payments = payments.filter((tempB) => tempB.type != 'create_account');
   }
