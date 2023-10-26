@@ -25,20 +25,22 @@ export function UserPanel({
   const [notification, setNotification] = useState<Notification | null>(null);
 
   const listedPayments = payments?.map((tempPayment, index) => {
+    const { type, asset_code, ammount, to, date } = tempPayment;
+    
     return (
       <div
         key={`payment-${index}`}
         className="payment m-3 justify-center break-words border-violet-strong bg-violet-strong bg-opacity-20 p-1 text-center text-white"
       >
         <p>
-          <span className="text-slate-400">{tempPayment.type}</span>: (
-          <span className="text-yellow-400">{tempPayment.asset_code ? tempPayment.asset_code : 'XML'}</span> -{' '}
-          <span className="text-green-400"> {tempPayment.ammount}</span>)
+          <span className="text-slate-400">{type}</span>: (
+          <span className="text-yellow-400">{asset_code ? asset_code : 'XML'}</span> -{' '}
+          <span className="text-green-400"> {ammount}</span>)
         </p>
         <p>
-          <span className="text-slate-400">To:</span> {tempPayment.to}
+          <span className="text-slate-400">To:</span> {to}
         </p>
-        <span className="text-slate-400"> Date:</span> {tempPayment.date.split('T')[0]}
+        <span className="text-slate-400"> Date:</span> {date.split('T')[0]}
       </div>
     );
   });
