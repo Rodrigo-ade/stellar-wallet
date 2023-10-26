@@ -7,7 +7,7 @@ export interface IBalance {
 }
 
 export interface IPayment {
-  ammount: string;
+  amount: string;
   type: string;
   from: string;
   to: string;
