@@ -45,6 +45,9 @@ context('Dashboard', () => {
           connect(tempKey);
         });
       cy.wait(TIMEOUT_MS);
+    });
+
+    beforeEach(() => {
       cy.get('.balance-0').as('balance');
     });
 
@@ -69,7 +72,7 @@ context('Dashboard', () => {
       cy.contains('Funding your account... please wait.').should('exist');
       cy.wait(TIMEOUT_MS);
       cy.contains('Your account was funded succesfully!').should('exist');
-      cy.get('.balance-0').should('have.text', '10000.00 XLM');
+      cy.get('@balance').should('have.text', '10000.00 XLM');
     });
 
     it('Should not exist "Fund Account" button after first funding', () => {
