@@ -95,7 +95,9 @@ export function UserPanel({
         {accountExists ? (
           <Payments sendPayment={sendPayment} />
         ) : (
-          <div className="m-2 text-xl text-slate-400">To send asset, fund your account first...</div>
+          <div className="hidden-payments-message m-2 text-xl text-slate-400">
+            To send asset, fund your account first...
+          </div>
         )}
       </div>
 
