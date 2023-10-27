@@ -10,7 +10,7 @@ import { UserPanel } from '@/components/userPanel/UserPanel';
 import { redirectToIndex } from '@/utils/utils';
 import { logOut } from '@/storage/stateStorage/stateSlice';
 
-import { fundAccount } from '@/services/stellar';
+import { fundAccount, sendPayment } from '@/services/stellar';
 import { IBalance, getAccount, IPayment } from '@/utils/utils';
 
 export default function Dashboard(): React.ReactElement {
@@ -75,6 +75,7 @@ export default function Dashboard(): React.ReactElement {
               payments={payments}
               fundAccount={fundAccount}
               setFunded={setFunded}
+              sendPayment={sendPayment}
             />
           )}
         </div>

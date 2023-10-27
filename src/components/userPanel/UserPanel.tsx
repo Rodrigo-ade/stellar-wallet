@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { ActionButton } from '../actionButton/ActionButton';
+import { Payments } from '../payments/Payments';
 import { NotificationModal } from '../notificationModal/NotificationModal';
 
 import { Notification } from '@/entities/Notification';
@@ -12,6 +13,7 @@ interface IUserPanelProps {
   balance: IBalance[] | null;
   payments: IPayment[] | null;
   setFunded: (isFunding: boolean) => void;
+  sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<boolean | string>;
 }
 
 export function UserPanel({
@@ -20,6 +22,7 @@ export function UserPanel({
   payments,
   publicKey,
   setFunded,
+  sendPayment,
 }: IUserPanelProps): React.ReactElement {
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
