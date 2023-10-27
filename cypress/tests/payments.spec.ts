@@ -24,14 +24,18 @@ context('Payments', () => {
       cy.wait(TIMEOUT_MS);
     });
 
+    beforeEach(() => {
+      cy.get('.sender-private-key').as('sender-private-key-input');
+    });
+
     it('Should not send Payment with wrong data', () => {
-      cy.get('.sender-private-key').type(FUNDED_ACCOUNT_SECRET_KEY);
+      cy.get('@sender-private-key-input').type(FUNDED_ACCOUNT_SECRET_KEY);
       cy.contains('Send').click();
       cy.get('.notification').should('have.text', WRONG_PUBLIC_KEY_MESSAGE);
     });
 
     it('Should send Payment', () => {
-      cy.get('.sender-private-key').clear().type(FUNDED_ACCOUNT_SECRET_KEY);
+      cy.get('@sender-private-key-input').clear().type(FUNDED_ACCOUNT_SECRET_KEY);
       cy.get('.receiver-public-key').type(RECEIVER_PUBLIC_KEY);
       cy.get('.amount').type(BALANCE_TO_SEND);
       cy.contains('Send').click();
