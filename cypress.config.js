@@ -1,6 +1,5 @@
 const { defineConfig } = require('cypress');
-
-require('dotenv').config({ path: `${__dirname}/.env.local` });
+require('dotenv').config();
 
 module.exports = defineConfig({
   video: false,
@@ -12,5 +11,8 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: 'cypress/tests/**/*.spec.{js,jsx,ts,tsx}',
+    env: {
+      ...process.env,
+    }
   }
 });
