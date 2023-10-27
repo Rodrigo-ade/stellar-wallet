@@ -1,4 +1,4 @@
-import { Keypair, StrKey, Server } from 'stellar-sdk';
+import { Keypair, StrKey, Server, TransactionBuilder, BASE_FEE, Networks, Operation, Asset } from 'stellar-sdk';
 
 const STELLAR_SERVER = process.env.NEXT_PUBLIC_TESTNET_URL;
 const FRIENDBOT_FUND_URL = process.env.NEXT_PUBLIC_FRIENDBOT_URL;
@@ -37,4 +37,51 @@ export async function getAccount(publicKey: string) {
 export async function fundAccount(publicKey: string) {
   const { ok } = await fetch(`${FRIENDBOT_FUND_URL}?addr=${publicKey}`);
   return ok;
+}
+
+export async function sendPayment(
+  senderPrivateKey: string,
+  receiverPublicKey: string,
+  amount: string
+): Promise<boolean | string> {
+  try {
+    if (!isSecretKeyValid(senderPrivateKey)) {
+      throw new Error('Invalid secret key');
+    }
+
+    if (!StrKey.isValidEd25519PublicKey(receiverPublicKey)) {
+      throw new Error('Invalid public key');
+    }
+
+    if (Number(amount) <= 0) {
+      throw new Error('You can not send 0');
+    }
+
+    const sourceKeys = Keypair.fromSecret(senderPrivateKey);
+    const destinationId = receiverPublicKey;
+
+    await server.loadAccount(destinationId);
+    const sourceAccount = await server.loadAccount(sourceKeys.publicKey());
+
+    const transaction = new TransactionBuilder(sourceAccount, {
+      fee: BASE_FEE,
+      networkPassphrase: Networks.TESTNET,
+    })
+      .addOperation(
+        Operation.payment({
+          destination: destinationId,
+          asset: Asset.native(),
+          amount,
+        })
+      )
+      .setTimeout(180)
+      .build();
+
+    transaction.sign(sourceKeys);
+
+    await server.submitTransaction(transaction);
+    return true;
+  } catch (e) {
+    return e.message;
+  }
 }
