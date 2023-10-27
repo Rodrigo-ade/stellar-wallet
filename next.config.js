@@ -11,8 +11,6 @@ const nextConfig = {
   typescript: {
     tsconfigPath: './tsconfig.json',
   },
-  env: {
-  },
   eslint: {
     dirs: ['src', 'cypress'],
   },
