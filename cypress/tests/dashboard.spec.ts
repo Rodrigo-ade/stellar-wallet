@@ -45,10 +45,11 @@ context('Dashboard', () => {
           connect(tempKey);
         });
       cy.wait(TIMEOUT_MS);
+      cy.get('.balance-0').as('balance');
     });
 
     it('Should have 0.00 as balance', () => {
-      cy.get('.balance-0').should('have.text', '0.00 XLM');
+      cy.get('@balance').should('have.text', '0.00 XLM');
     });
 
     it('Should exist "Fund Account" button', () => {
