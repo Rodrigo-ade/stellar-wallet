@@ -4,7 +4,7 @@ import { ActionButton } from '../actionButton/ActionButton';
 import { Notification } from '@/entities/Notification';
 
 interface IPaymentsProps {
-  sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<boolean | string>;
+  sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
 }
 
 export function Payments({ sendPayment }: IPaymentsProps): React.ReactElement {

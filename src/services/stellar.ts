@@ -43,7 +43,7 @@ export async function sendPayment(
   senderPrivateKey: string,
   receiverPublicKey: string,
   amount: string
-): Promise<boolean | string> {
+): Promise<void | string> {
   try {
     if (!isSecretKeyValid(senderPrivateKey)) {
       throw new Error('Invalid secret key');
@@ -80,7 +80,6 @@ export async function sendPayment(
     transaction.sign(sourceKeys);
 
     await server.submitTransaction(transaction);
-    return true;
   } catch (e) {
     return e.message;
   }

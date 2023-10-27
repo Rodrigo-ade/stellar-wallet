@@ -13,7 +13,7 @@ interface IUserPanelProps {
   balance: IBalance[] | null;
   payments: IPayment[] | null;
   setFunded: (isFunding: boolean) => void;
-  sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<boolean | string>;
+  sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
 }
 
 export function UserPanel({
