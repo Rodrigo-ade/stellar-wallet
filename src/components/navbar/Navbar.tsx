@@ -13,7 +13,7 @@ export function Navbar({ handleDisconnect }: INavbarProps): React.ReactElement {
         </p>
       </div>
       <div>
-        <ActionButton title="Disconnect" handleClick={() => handleDisconnect()} />
+        <ActionButton title="Disconnect" handleClick={handleDisconnect} />
       </div>
     </nav>
   );
