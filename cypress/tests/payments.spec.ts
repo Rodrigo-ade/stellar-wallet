@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const DEFAULT_URL = Cypress.env('BASE_URL');
+const TRANSACTIONS_PATH = Cypress.env('NEXT_PUBLIC_TESTNET_URL') + Cypress.env('TRANSACTIONS_PATH');
 const FUNDED_ACCOUNT_SECRET_KEY = Cypress.env('FUNDED_ACCOUNT_SECRET_KEY');
 const NEW_ACCOUNT_SECRET_KEY = Cypress.env('NEW_ACCOUNT_SECRET_KEY');
 const RECEIVER_PUBLIC_KEY = Cypress.env('RECEIVER_PUBLIC_KEY');
@@ -34,7 +35,7 @@ context('Payments', () => {
       cy.get('.receiver-public-key').type(RECEIVER_PUBLIC_KEY);
       cy.get('.amount').type(BALANCE_TO_SEND);
       cy.contains('Send').click();
-      cy.intercept('POST', 'https://horizon-testnet.stellar.org/transactions').as('payment');
+      cy.intercept('POST', TRANSACTIONS_PATH).as('payment');
       cy.wait('@payment').its('response.statusCode').should('eq', 200);
       cy.get('.notification').should('have.text', SUCCESSFULL_PAYMENT_MESSAGE);
     });
