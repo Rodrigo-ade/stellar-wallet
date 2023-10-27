@@ -49,6 +49,7 @@ context('Dashboard', () => {
 
     beforeEach(() => {
       cy.get('.balance-0').as('balance');
+      cy.contains('Fund Account').as('fundAccount');
     });
 
     it('Should have 0.00 as balance', () => {
@@ -56,7 +57,7 @@ context('Dashboard', () => {
     });
 
     it('Should exist "Fund Account" button', () => {
-      cy.contains('Fund Account').should('exist');
+      cy.get('@fundAccount').should('exist');
     });
 
     it('Should show "No payments found"', () => {
@@ -68,7 +69,7 @@ context('Dashboard', () => {
     });
 
     it('Should Fund Account with 10000 XLM and show notifications', () => {
-      cy.contains('Fund Account').click();
+      cy.get('@fundAccount').click();
       cy.contains('Funding your account... please wait.').should('exist');
       cy.wait(TIMEOUT_MS);
       cy.contains('Your account was funded succesfully!').should('exist');
@@ -76,7 +77,7 @@ context('Dashboard', () => {
     });
 
     it('Should not exist "Fund Account" button after first funding', () => {
-      cy.contains('Fund Account').should('not.exist');
+      cy.get('@fundAccount').should('not.exist');
     });
   });
 });
