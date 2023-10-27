@@ -39,35 +39,28 @@ export async function getAccount(publicKey: string) {
     ];
   } else {
     const { balances } = account;
-    balance = balances.filter((tempB) => Number(tempB.balance) > 0)
+    balance = balances
+      .filter((tempB) => Number(tempB.balance) > 0)
       .map((tempBalance) => {
-        const {asset_type, asset_code, balance} = tempBalance;
-        
+        const { asset_type, asset_code, balance } = tempBalance;
+
         return {
           asset: asset_type === 'native' ? 'XLM' : asset_code,
           balance: balance,
-        }
+        };
       });
 
-
     payments = (await account.payments({ order: 'desc' })).records.map((tempPayment) => {
-      const {
-        amount,
-        type,
-        created_at,
-        from,
-        to,
-        asset_code,
-      } = tempPayment;
+      const { amount, type, created_at, from, to, asset_code } = tempPayment;
 
-      return ({
+      return {
         amount,
         type: type.toString(),
         date: created_at,
         from: from,
         to,
         asset_code,
-      });
+      };
     });
 
     payments = payments.filter((tempB) => tempB.type != 'create_account');
