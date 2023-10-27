@@ -58,9 +58,9 @@ export async function sendPayment(
     }
 
     const sourceKeys = Keypair.fromSecret(senderPrivateKey);
-    const destinationId = receiverPublicKey;
+    const destination = receiverPublicKey;
 
-    await server.loadAccount(destinationId);
+    await server.loadAccount(destination);
     const sourceAccount = await server.loadAccount(sourceKeys.publicKey());
 
     const transaction = new TransactionBuilder(sourceAccount, {
@@ -69,7 +69,7 @@ export async function sendPayment(
     })
       .addOperation(
         Operation.payment({
-          destination: destinationId,
+          destination,
           asset: Asset.native(),
           amount,
         })
