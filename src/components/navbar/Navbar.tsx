@@ -1,10 +1,12 @@
+import { FC } from 'react';
+
 import { ActionButton } from '../actionButton/ActionButton';
 
 interface INavbarProps {
   handleDisconnect: () => void;
 }
 
-export function Navbar({ handleDisconnect }: INavbarProps): React.ReactElement {
+export const Navbar: FC<INavbarProps> = ({ handleDisconnect }) => {
   return (
     <nav className="flex h-40 justify-between bg-purple-slight-dark p-10 text-slate-400">
       <div>
@@ -17,4 +19,4 @@ export function Navbar({ handleDisconnect }: INavbarProps): React.ReactElement {
       </div>
     </nav>
   );
-}
+};

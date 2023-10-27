@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 interface ILoadingProps {
   title?: string;
 }
 
-export function Loading({ title }: ILoadingProps): React.ReactElement {
+export const Loading: FC<ILoadingProps> = ({ title }) => {
   return (
     <>
       <div className="m-5 grid justify-center text-center">
@@ -11,4 +13,4 @@ export function Loading({ title }: ILoadingProps): React.ReactElement {
       <p className="mt-2 text-center text-2xl font-semibold text-slate-300">{title ? title : 'Loading...'}</p>
     </>
   );
-}
+};

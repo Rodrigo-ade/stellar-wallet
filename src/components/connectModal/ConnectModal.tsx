@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { ActionButton } from '../actionButton/ActionButton';
 
 interface IConnectModalProps {
@@ -11,7 +13,7 @@ interface IConnectModalProps {
   logInUser: (publicKey: string) => void;
 }
 
-export function ConnectModal({
+export const ConnectModal: FC<IConnectModalProps> = ({
   setShowConnectModal,
   isKeyValid,
   setIsKeyValid,
@@ -20,7 +22,7 @@ export function ConnectModal({
   isSecretKeyValid,
   getPublicKey,
   logInUser,
-}: IConnectModalProps): React.ReactElement {
+}) => {
   function handleConnect() {
     if (!isSecretKeyValid(privateKey)) {
       setIsKeyValid(false);
@@ -69,4 +71,4 @@ export function ConnectModal({
       </div>
     </div>
   );
-}
+};

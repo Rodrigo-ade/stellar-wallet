@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import { ActionButton } from '../actionButton/ActionButton';
 import { Notification } from '@/entities/Notification';
@@ -7,7 +7,7 @@ interface IPaymentsProps {
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
 }
 
-export function Payments({ sendPayment }: IPaymentsProps): React.ReactElement {
+export const Payments: FC<IPaymentsProps> = ({ sendPayment }) => {
   const [amount, setAmount] = useState('');
   const [senderPrivateKey, setSenderPrivateKey] = useState('');
   const [receiverPublicKey, setReceiverPublicKey] = useState('');
@@ -65,4 +65,4 @@ export function Payments({ sendPayment }: IPaymentsProps): React.ReactElement {
       </div>
     </div>
   );
-}
+};

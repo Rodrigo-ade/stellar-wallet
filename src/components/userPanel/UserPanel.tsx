@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import { ActionButton } from '../actionButton/ActionButton';
 import { Payments } from '../payments/Payments';
@@ -16,14 +16,14 @@ interface IUserPanelProps {
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
 }
 
-export function UserPanel({
+export const UserPanel: FC<IUserPanelProps> = ({
   fundAccount,
   balance,
   payments,
   publicKey,
   setFunded,
   sendPayment,
-}: IUserPanelProps): React.ReactElement {
+}) => {
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
 
@@ -144,4 +144,4 @@ export function UserPanel({
       </div>
     </>
   );
-}
+};

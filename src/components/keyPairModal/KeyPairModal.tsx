@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { useState } from 'react';
 import { ActionButton } from '../actionButton/ActionButton';
 
@@ -9,13 +11,13 @@ export interface IKeyPairModalProps {
   setPublicKey: (publicKey: string) => void;
 }
 
-export function KeyPairModal({
+export const KeyPairModal: FC<IKeyPairModalProps> = ({
   setShowKeys,
   privateKey,
   setPrivateKey,
   publicKey,
   setPublicKey,
-}: IKeyPairModalProps): React.ReactElement {
+}) => {
   const [copyKeysButtonText, setCopyKeysButtonText] = useState<'Copy Keys' | 'Copied!'>('Copy Keys');
 
   function handleCopyKeys() {
@@ -87,4 +89,4 @@ export function KeyPairModal({
       </div>
     </div>
   );
-}
+};
