@@ -19,7 +19,9 @@ context('Dashboard', () => {
     });
 
     it('Should have balance', () => {
-      cy.get('.balance-0').should('exist');
+      cy.get('.balance-0')
+        .should('exist')
+        .should('have.text','10000.00 XLM');
     });
 
     it('Should not exist "Fund Account" button', () => {
