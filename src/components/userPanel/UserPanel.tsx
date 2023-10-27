@@ -89,6 +89,18 @@ export function UserPanel({
         {listedBalance}
       </div>
       <hr className=" m-5 border-violet-strong" />
+
+      <div>
+        <p className="mb-3 text-3xl text-slate-200">Transfer</p>
+        {accountExists ? (
+          <Payments sendPayment={sendPayment} />
+        ) : (
+          <div className="m-2 text-xl text-slate-400">To send asset, fund your account first...</div>
+        )}
+      </div>
+
+      <hr className=" m-5 border-violet-strong" />
+
       {accountExists ? (
         ''
       ) : (
