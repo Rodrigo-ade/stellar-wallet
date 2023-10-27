@@ -12,8 +12,5 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: 'cypress/tests/**/*.spec.{js,jsx,ts,tsx}',
-  },
-  env: {
-    CYPRESS_BASE_URL: 'http://localhost:3000/',
   }
 });

@@ -11,10 +11,6 @@ const nextConfig = {
   typescript: {
     tsconfigPath: './tsconfig.json',
   },
-  env: {
-    TESTNET_URL: 'https://horizon-testnet.stellar.org',
-    FRIENDBOT_URL: `https://friendbot.stellar.org`,
-  },
   eslint: {
     dirs: ['src', 'cypress'],
   },

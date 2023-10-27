@@ -1,7 +1,7 @@
 import { Keypair, StrKey, Server } from 'stellar-sdk';
 
-const STELLAR_SERVER = process.env.TESTNET_URL;
-const FRIENDBOT_FUND_URL = process.env.FRIENDBOT_URL;
+const STELLAR_SERVER = process.env.NEXT_PUBLIC_TESTNET_URL;
+const FRIENDBOT_FUND_URL = process.env.NEXT_PUBLIC_FRIENDBOT_URL;
 
 const server = new Server(STELLAR_SERVER);
 
