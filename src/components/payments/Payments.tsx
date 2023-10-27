@@ -17,10 +17,10 @@ export function Payments({ sendPayment }: IPaymentsProps): React.ReactElement {
     setPaymentNotification({ isSuccess: true, message: 'Loading...' });
     const result = await sendPayment(senderPrivateKey, receiverPublicKey, amount);
 
-    if (result === true) {
-      setPaymentNotification({ isSuccess: true, message: 'Success!' });
-    } else {
+    if (result) {
       setPaymentNotification({ isSuccess: false, message: result });
+    } else {
+      setPaymentNotification({ isSuccess: true, message: 'Success!' });
     }
   }
 
