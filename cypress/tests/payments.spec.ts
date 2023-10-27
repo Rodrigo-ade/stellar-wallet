@@ -2,7 +2,11 @@
 const DEFAULT_URL = Cypress.env('BASE_URL');
 const FUNDED_ACCOUNT_SECRET_KEY = Cypress.env('FUNDED_ACCOUNT_SECRET_KEY');
 const NEW_ACCOUNT_SECRET_KEY = Cypress.env('NEW_ACCOUNT_SECRET_KEY');
+const RECEIVER_PUBLIC_KEY = Cypress.env('RECEIVER_PUBLIC_KEY');
+
 const WRONG_PUBLIC_KEY_MESSAGE = 'Invalid public key';
+const SUCCESSFULL_PAYMENT_MESSAGE = 'Success!';
+const BALANCE_TO_SEND = '12';
 const TIMEOUT_MS = 1500;
 
 const connect = (key: string) => {
@@ -23,6 +27,16 @@ context('Payments', () => {
       cy.get('.sender-private-key').type(FUNDED_ACCOUNT_SECRET_KEY);
       cy.contains('Send').click();
       cy.get('.notification').should('have.text', WRONG_PUBLIC_KEY_MESSAGE);
+    });
+
+    it('Should send Payment', () => {
+      cy.get('.sender-private-key').clear().type(FUNDED_ACCOUNT_SECRET_KEY);
+      cy.get('.receiver-public-key').type(RECEIVER_PUBLIC_KEY);
+      cy.get('.amount').type(BALANCE_TO_SEND);
+      cy.contains('Send').click();
+      cy.intercept('POST', 'https://horizon-testnet.stellar.org/transactions').as('payment');
+      cy.wait('@payment').its('response.statusCode').should('eq', 200);
+      cy.get('.notification').should('have.text', SUCCESSFULL_PAYMENT_MESSAGE);
     });
   });
 
