@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { ActionButton } from '../actionButton/ActionButton';
 import { Notification } from '@/entities/Notification';
 
-export function Payments(): React.ReactElement {
+interface IPaymentsProps {
+  sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<boolean | string>;
+}
+
+export function Payments({ sendPayment }: IPaymentsProps): React.ReactElement {
   const [amount, setAmount] = useState('');
   const [senderPrivateKey, setSenderPrivateKey] = useState('');
   const [receiverPublicKey, setReceiverPublicKey] = useState('');
