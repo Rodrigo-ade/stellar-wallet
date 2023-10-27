@@ -39,6 +39,7 @@ context('Payments', () => {
       cy.get('.receiver-public-key').type(RECEIVER_PUBLIC_KEY);
       cy.get('.amount').type(BALANCE_TO_SEND);
       cy.contains('Send').click();
+      cy.intercept('POST', TRANSACTIONS_PATH).as('payment');
       cy.wait('@payment').its('response.statusCode').should('eq', 200);
       cy.get('.notification').should('have.text', SUCCESSFULL_PAYMENT_MESSAGE);
     });
