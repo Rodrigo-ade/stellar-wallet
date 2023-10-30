@@ -11,3 +11,17 @@ export async function getAlbedoPublicKey() {
 
   return publicKey;
 }
+
+export async function signTransaction(xdr: string) {
+  try {
+    await albedo.tx({
+      xdr,
+      network: 'testnet',
+      submit: true,
+    });
+
+    return { success: true, message: 'Success!' };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+}
