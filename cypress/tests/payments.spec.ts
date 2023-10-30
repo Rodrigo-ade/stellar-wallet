@@ -57,3 +57,5 @@ context('Payments', () => {
     });
   });
 });
+
+export {};
