@@ -21,6 +21,12 @@ export const Payments: FC<IPaymentsProps> = ({
   const [receiverPublicKey, setReceiverPublicKey] = useState('');
   const [paymentNotification, setPaymentNotification] = useState<Notification>();
 
+  function clearPaymentFields() {
+    setSenderPrivateKey('');
+    setReceiverPublicKey('');
+    setAmount('')
+  };
+
   async function handlePayment() {
     setPaymentNotification({ isSuccess: true, message: 'Loading...' });
     const result = await sendPayment(senderPrivateKey, receiverPublicKey, amount);
@@ -29,6 +35,7 @@ export const Payments: FC<IPaymentsProps> = ({
       setPaymentNotification({ isSuccess: false, message: result });
     } else {
       setPaymentNotification({ isSuccess: true, message: 'Success!' });
+      clearPaymentFields();
     }
   }
 
@@ -39,9 +46,11 @@ export const Payments: FC<IPaymentsProps> = ({
 
     if (success) {
       setPaymentNotification({ isSuccess: true, message });
+      clearPaymentFields();
     } else {
       setPaymentNotification({ isSuccess: false, message });
     }
+
   }
 
   return (
