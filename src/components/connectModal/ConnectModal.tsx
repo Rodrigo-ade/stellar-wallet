@@ -20,7 +20,7 @@ export function ConnectModal({
   isSecretKeyValid,
   getPublicKey,
   logInUser,
-}: IConnectModalProps) {
+}: IConnectModalProps): React.ReactElement {
   function handleConnect() {
     if (!isSecretKeyValid(privateKey)) {
       setIsKeyValid(false);
