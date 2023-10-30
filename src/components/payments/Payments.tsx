@@ -51,7 +51,7 @@ export const Payments: FC<IPaymentsProps> = ({
           value={senderPrivateKey}
           onChange={(e) => setSenderPrivateKey(e.target.value)}
           className="sender-private-key mt-2 w-2/3 bg-transparent text-sm text-white"
-          placeholder="Your private key"
+          placeholder="Your private key (If using Albedo, do not complete this field)"
         ></input>
         <input
           value={receiverPublicKey}
