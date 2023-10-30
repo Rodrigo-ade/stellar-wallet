@@ -88,3 +88,37 @@ export async function sendPayment(
     return e.message;
   }
 }
+
+export async function createXDRTransaction(
+  senderPublicKey: string,
+  receiverPublicKey: string,
+  amount: string
+): Promise<string> {
+  let xdr: string;
+  try {
+    const sourceAccount = await server.loadAccount(senderPublicKey);
+    const destination = receiverPublicKey;
+
+    await server.loadAccount(destination);
+
+    const transaction = new TransactionBuilder(sourceAccount, {
+      fee: BASE_FEE,
+      networkPassphrase: Networks.TESTNET,
+    })
+      .addOperation(
+        Operation.payment({
+          destination,
+          amount,
+          asset: Asset.native(),
+        })
+      )
+      .setTimeout(60)
+      .build();
+
+    xdr = transaction.toXDR();
+  } catch (e) {
+    xdr = '';
+  }
+
+  return xdr;
+}
