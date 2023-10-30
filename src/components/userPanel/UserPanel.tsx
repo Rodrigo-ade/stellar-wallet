@@ -14,6 +14,8 @@ interface IUserPanelProps {
   payments: IPayment[] | null;
   setFunded: (isFunding: boolean) => void;
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
+  createXDRTransaction: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
+  signTransaction: (xdr: string) => Promise<{ success: boolean; message: any }>;
 }
 
 export const UserPanel: FC<IUserPanelProps> = ({
@@ -23,6 +25,8 @@ export const UserPanel: FC<IUserPanelProps> = ({
   publicKey,
   setFunded,
   sendPayment,
+  createXDRTransaction,
+  signTransaction,
 }) => {
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
@@ -93,7 +97,12 @@ export const UserPanel: FC<IUserPanelProps> = ({
       <div>
         <p className="mb-3 text-3xl text-slate-200">Transfer</p>
         {accountExists ? (
-          <Payments sendPayment={sendPayment} />
+          <Payments
+            sendPayment={sendPayment}
+            senderPublicKey={publicKey}
+            createXDRTransaction={createXDRTransaction}
+            signTransaction={signTransaction}
+          />
         ) : (
           <div className="hidden-payments-message m-2 text-xl text-slate-400">
             To send asset, fund your account first...

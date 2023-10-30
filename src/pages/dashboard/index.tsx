@@ -10,8 +10,10 @@ import { UserPanel } from '@/components/userPanel/UserPanel';
 import { redirectToIndex } from '@/utils/utils';
 import { logOut } from '@/storage/stateStorage/stateSlice';
 
-import { fundAccount, sendPayment } from '@/services/stellar';
 import { IBalance, getAccount, IPayment } from '@/utils/utils';
+
+import { fundAccount, sendPayment, createXDRTransaction } from '@/services/stellar';
+import { signTransaction } from '@/services/albedo';
 
 export default function Dashboard(): React.ReactElement {
   const [loading, setLoading] = useState(true);
@@ -76,6 +78,8 @@ export default function Dashboard(): React.ReactElement {
               fundAccount={fundAccount}
               setFunded={setFunded}
               sendPayment={sendPayment}
+              createXDRTransaction={createXDRTransaction}
+              signTransaction={signTransaction}
             />
           )}
         </div>

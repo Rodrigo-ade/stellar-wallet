@@ -4,10 +4,18 @@ import { ActionButton } from '../actionButton/ActionButton';
 import { Notification } from '@/entities/Notification';
 
 interface IPaymentsProps {
+  senderPublicKey: string;
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
+  createXDRTransaction: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
+  signTransaction: (xdr: string) => Promise<{ success: boolean; message: any }>;
 }
 
-export const Payments: FC<IPaymentsProps> = ({ sendPayment }) => {
+export const Payments: FC<IPaymentsProps> = ({
+  sendPayment,
+  senderPublicKey,
+  createXDRTransaction,
+  signTransaction,
+}) => {
   const [amount, setAmount] = useState('');
   const [senderPrivateKey, setSenderPrivateKey] = useState('');
   const [receiverPublicKey, setReceiverPublicKey] = useState('');
@@ -21,6 +29,18 @@ export const Payments: FC<IPaymentsProps> = ({ sendPayment }) => {
       setPaymentNotification({ isSuccess: false, message: result });
     } else {
       setPaymentNotification({ isSuccess: true, message: 'Success!' });
+    }
+  }
+
+  async function handleAlbedoPayment() {
+    setPaymentNotification({ isSuccess: true, message: 'Loading...' });
+    const xdr = await createXDRTransaction(senderPublicKey, receiverPublicKey, amount);
+    const { success, message } = await signTransaction(xdr);
+
+    if (success) {
+      setPaymentNotification({ isSuccess: true, message });
+    } else {
+      setPaymentNotification({ isSuccess: false, message });
     }
   }
 
@@ -60,7 +80,10 @@ export const Payments: FC<IPaymentsProps> = ({ sendPayment }) => {
         {paymentNotification && paymentNotification.message === 'Loading...' ? (
           ''
         ) : (
-          <ActionButton title="Send" handleClick={handlePayment}></ActionButton>
+          <>
+            <ActionButton title="Send" handleClick={handlePayment}></ActionButton>
+            <ActionButton title="Send with Albedo" handleClick={handleAlbedoPayment}></ActionButton>
+          </>
         )}
       </div>
     </div>
