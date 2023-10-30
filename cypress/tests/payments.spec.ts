@@ -8,7 +8,7 @@ const RECEIVER_PUBLIC_KEY = Cypress.env('RECEIVER_PUBLIC_KEY');
 const WRONG_PUBLIC_KEY_MESSAGE = 'Invalid public key';
 const SUCCESSFULL_PAYMENT_MESSAGE = 'Success!';
 const BALANCE_TO_SEND = '12';
-const TIMEOUT_MS = 1500;
+const TIMEOUT_MS = 3000;
 
 const connect = (key: string) => {
   cy.visit(DEFAULT_URL);

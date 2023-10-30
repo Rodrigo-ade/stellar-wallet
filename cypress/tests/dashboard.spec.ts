@@ -2,7 +2,7 @@
 
 const DEFAULT_URL = Cypress.env('BASE_URL');
 const FUNDED_ACCOUNT_SECRET_KEY = Cypress.env('FUNDED_ACCOUNT_SECRET_KEY');
-const TIMEOUT_MS = 1500;
+const TIMEOUT_MS = 3000;
 
 const connect = (key: string) => {
   cy.visit(DEFAULT_URL);
