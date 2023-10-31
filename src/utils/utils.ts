@@ -1,5 +1,6 @@
 import Router from 'next/router';
 import { getAccount as getAccountService } from '@/services/stellar';
+import { AccountResponse } from 'stellar-sdk';
 
 export interface IBalance {
   asset: string;
@@ -38,33 +39,37 @@ export async function getAccount(publicKey: string) {
       },
     ];
   } else {
-    const { balances } = account;
-    balance = balances
-      .filter((tempB) => Number(tempB.balance) > 0)
-      .map((tempBalance) => {
-        const { asset_type, asset_code, balance } = tempBalance;
-
-        return {
-          asset: asset_type === 'native' ? 'XLM' : asset_code,
-          balance: balance,
-        };
-      });
-
-    payments = (await account.payments({ order: 'desc' })).records.map((tempPayment) => {
-      const { amount, type, created_at, from, to, asset_code } = tempPayment;
-
-      return {
-        amount,
-        type: type.toString(),
-        date: created_at,
-        from: from,
-        to,
-        asset_code,
-      };
-    });
-
-    payments = payments.filter((tempB) => tempB.type != 'create_account');
+    payments = await getAccountPayments(account);
+    balance = getAccountBalance(account);
   }
 
   return { payments, balance };
+}
+
+function getAccountBalance({ balances }: AccountResponse): IBalance[] {
+  const balance = balances.map((tempBalance) => {
+    const { asset_type, asset_code, balance } = tempBalance;
+
+    return {
+      asset: asset_type === 'native' ? 'XLM' : asset_code,
+      balance: balance,
+    };
+  });
+
+  return balance.filter((tempB) => Number(tempB.balance) > 0);
+}
+
+async function getAccountPayments(account: AccountResponse) {
+  const { records } = await account.payments({ order: 'desc' });
+
+  const payments = records.map(({ amount, type, created_at, from, to, asset_code }) => ({
+    amount,
+    type: type.toString(),
+    date: created_at,
+    from,
+    to,
+    asset_code,
+  }));
+
+  return payments.filter((tempB) => tempB.type != 'create_account');
 }
