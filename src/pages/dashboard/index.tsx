@@ -16,12 +16,12 @@ import { fundAccount, sendPayment, createXDRTransaction } from '@/services/stell
 import { signTransaction } from '@/services/albedo';
 
 export default function Dashboard(): React.ReactElement {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const account = useSelector(selectAccount);
   const [balance, setBalance] = useState<IBalance[] | null>(null);
   const [payments, setPayments] = useState<IPayment[] | null>(null);
 
-  const [funded, setFunded] = useState(false);
+  const [isFunded, setIsFunded] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -31,11 +31,11 @@ export default function Dashboard(): React.ReactElement {
 
   useEffect(() => {
     async function handleGetAccount(publicKey: string) {
-      setLoading(true);
+      setIsLoading(true);
       const { balance, payments } = await getAccount(publicKey);
       setPayments(payments);
       setBalance(balance);
-      setLoading(false);
+      setIsLoading(false);
     }
 
     if (account != null) {
@@ -43,11 +43,11 @@ export default function Dashboard(): React.ReactElement {
     }
 
     return () => {
-      setLoading(true);
+      setIsLoading(true);
       setBalance(null);
       setPayments(null);
     };
-  }, [account, funded]);
+  }, [account, isFunded]);
 
   if (!account) {
     return (
@@ -66,7 +66,7 @@ export default function Dashboard(): React.ReactElement {
             <p className="break-words text-3xl font-semibold text-slate-400">{account.id}</p>
           </div>
           <hr className=" m-5 border-violet-strong" />
-          {loading ? (
+          {isLoading ? (
             <div className="p-14">
               <Loading title="Loading your account information..." />
             </div>
@@ -76,7 +76,7 @@ export default function Dashboard(): React.ReactElement {
               balance={balance}
               payments={payments}
               fundAccount={fundAccount}
-              setFunded={setFunded}
+              setIsFunded={setIsFunded}
               sendPayment={sendPayment}
               createXDRTransaction={createXDRTransaction}
               signTransaction={signTransaction}

@@ -12,7 +12,7 @@ interface IUserPanelProps {
   fundAccount: (publicKey: string) => Promise<boolean>;
   balance: IBalance[] | null;
   payments: IPayment[] | null;
-  setFunded: (isFunding: boolean) => void;
+  setIsFunded: (isFunding: boolean) => void;
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
   createXDRTransaction: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
   signTransaction: (xdr: string) => Promise<{ success: boolean; message: any }>;
@@ -23,7 +23,7 @@ export const UserPanel: FC<IUserPanelProps> = ({
   balance,
   payments,
   publicKey,
-  setFunded,
+  setIsFunded,
   sendPayment,
   createXDRTransaction,
   signTransaction,
@@ -79,7 +79,7 @@ export const UserPanel: FC<IUserPanelProps> = ({
 
     setTimeout(() => {
       setNotification(null);
-      setFunded(true);
+      setIsFunded(true);
     }, NOTIFICATION_DELAY);
   }
 
