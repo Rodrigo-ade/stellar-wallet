@@ -15,7 +15,7 @@ interface IUserPanelProps {
   setIsFunded: (isFunding: boolean) => void;
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
   createXDRTransaction: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
-  signTransaction: (xdr: string) => Promise<{ success: boolean; message: any }>;
+  signTransaction: (xdr: string) => Promise<string>;
 }
 
 export const UserPanel: FC<IUserPanelProps> = ({

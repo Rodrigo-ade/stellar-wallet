@@ -1,27 +1,19 @@
 import albedo from '@albedo-link/intent';
 
 export async function getAlbedoPublicKey() {
-  let publicKey: string;
-
-  try {
-    publicKey = (await albedo.publicKey({})).pubkey;
-  } catch (e) {
-    publicKey = e.error.message;
-  }
-
-  return publicKey;
+  return (await albedo.publicKey({})).pubkey;
 }
 
-export async function signTransaction(xdr: string) {
+export async function signTransaction(xdr: string): Promise<string> {
   try {
-    await albedo.tx({
+    const { signed_envelope_xdr } = await albedo.tx({
       xdr,
       network: 'testnet',
       submit: true,
     });
 
-    return { success: true, message: 'Success!' };
+    return signed_envelope_xdr;
   } catch (error) {
-    return { success: false, message: error.message };
+    return '';
   }
 }

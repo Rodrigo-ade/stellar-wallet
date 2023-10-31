@@ -7,7 +7,7 @@ interface IPaymentsProps {
   senderPublicKey: string;
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
   createXDRTransaction: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
-  signTransaction: (xdr: string) => Promise<{ success: boolean; message: any }>;
+  signTransaction: (xdr: string) => Promise<string>;
 }
 
 export const Payments: FC<IPaymentsProps> = ({
@@ -42,13 +42,13 @@ export const Payments: FC<IPaymentsProps> = ({
   async function handleAlbedoPayment() {
     setPaymentNotification({ isSuccess: true, message: 'Loading...' });
     const xdr = await createXDRTransaction(senderPublicKey, receiverPublicKey, amount);
-    const { success, message } = await signTransaction(xdr);
+    const signed_envelope_xdr = await signTransaction(xdr);
 
-    if (success) {
-      setPaymentNotification({ isSuccess: true, message });
+    if (signed_envelope_xdr) {
+      setPaymentNotification({ isSuccess: true, message: 'Success!' });
       clearPaymentFields();
     } else {
-      setPaymentNotification({ isSuccess: false, message });
+      setPaymentNotification({ isSuccess: false, message: 'Error' });
     }
 
   }
