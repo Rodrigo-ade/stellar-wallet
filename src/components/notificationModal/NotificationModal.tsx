@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { Notification } from '@/entities/Notification';
 
 export interface INotificationModalProps {
@@ -5,11 +7,11 @@ export interface INotificationModalProps {
   redirect?: (() => void) | null;
 }
 
-export function NotificationModal({ notification, redirect = null }: INotificationModalProps) {
+export const NotificationModal: FC<INotificationModalProps> = ({ notification, redirect }) => {
   const { isSuccess, message } = notification;
 
   if (redirect) {
-    const REDIRECT_TIMEOUT = 3500;
+    const REDIRECT_TIMEOUT = 2500;
     setTimeout(() => {
       redirect();
     }, REDIRECT_TIMEOUT);
@@ -36,4 +38,4 @@ export function NotificationModal({ notification, redirect = null }: INotificati
       </div>
     </div>
   );
-}
+};

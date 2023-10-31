@@ -7,7 +7,8 @@ import { KeyPairModal } from '@/components/keyPairModal/KeyPairModal';
 import { ConnectModal } from '@/components/connectModal/ConnectModal';
 import { NotificationModal } from '@/components/notificationModal/NotificationModal';
 
-import { getRandomKeyPair, isSecretKeyValid, getPublicKey } from '@/services/stellar';
+import { getRandomKeyPair, isSecretKeyValid, getPublicKey, isPublicKeyValid } from '@/services/stellar';
+import { getAlbedoPublicKey } from '@/services/albedo';
 
 import { redirectToDashboard } from '@/utils/utils';
 import { logIn, selectAccount } from '@/storage/stateStorage/stateSlice';
@@ -38,6 +39,13 @@ const Home: NextPage = () => {
     setShowConnectModal(true);
   }
 
+  async function handleAlbedoLogIn() {
+    const publicKey = await getAlbedoPublicKey();
+    if (isPublicKeyValid(publicKey)) {
+      logInUser(publicKey);
+    }
+  }
+
   if (loggedPublicKey) {
     return (
       <NotificationModal
@@ -52,6 +60,7 @@ const Home: NextPage = () => {
         <div>
           <ActionButton title="Generate new keys" handleClick={handleGenerateKeys} />
           <ActionButton title="Connect with secret key" handleClick={handleLogIn} />
+          <ActionButton title="Connect with Albedo" handleClick={handleAlbedoLogIn} />
         </div>
         {showKeys ? (
           <KeyPairModal

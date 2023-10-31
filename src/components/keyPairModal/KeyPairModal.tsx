@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { useState } from 'react';
 import { ActionButton } from '../actionButton/ActionButton';
 
@@ -9,7 +11,13 @@ export interface IKeyPairModalProps {
   setPublicKey: (publicKey: string) => void;
 }
 
-export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey, setPublicKey }: IKeyPairModalProps) {
+export const KeyPairModal: FC<IKeyPairModalProps> = ({
+  setShowKeys,
+  privateKey,
+  setPrivateKey,
+  publicKey,
+  setPublicKey,
+}) => {
   const [copyKeysButtonText, setCopyKeysButtonText] = useState<'Copy Keys' | 'Copied!'>('Copy Keys');
 
   function handleCopyKeys() {
@@ -73,7 +81,7 @@ export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey
               </div>
             </div>
             <div className="justify-between bg-purple-highlight	px-4 py-3 sm:flex sm:px-6">
-              <ActionButton title={copyKeysButtonText} handleClick={handleCopyKeys}/>
+              <ActionButton title={copyKeysButtonText} handleClick={handleCopyKeys} />
               <ActionButton title="Close" handleClick={handleCloseKeyPairModal} />
             </div>
           </div>
@@ -81,4 +89,4 @@ export function KeyPairModal({ setShowKeys, privateKey, setPrivateKey, publicKey
       </div>
     </div>
   );
-}
+};
