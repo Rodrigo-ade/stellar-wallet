@@ -12,7 +12,7 @@ import { logOut } from '@/storage/stateStorage/stateSlice';
 
 import { IBalance, getAccount, IPayment } from '@/utils/utils';
 
-import { fundAccount, sendPayment, createXDRTransaction } from '@/services/stellar';
+import { fundAccount, sendPayment, createPayment } from '@/services/stellar';
 import { signTransaction } from '@/services/albedo';
 
 export default function Dashboard(): React.ReactElement {
@@ -78,7 +78,7 @@ export default function Dashboard(): React.ReactElement {
               fundAccount={fundAccount}
               setIsFunded={setIsFunded}
               sendPayment={sendPayment}
-              createXDRTransaction={createXDRTransaction}
+              createPayment={createPayment}
               signTransaction={signTransaction}
             />
           )}

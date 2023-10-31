@@ -14,7 +14,7 @@ interface IUserPanelProps {
   payments: IPayment[] | null;
   setIsFunded: (isFunding: boolean) => void;
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
-  createXDRTransaction: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
+  createPayment: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
   signTransaction: (xdr: string) => Promise<string>;
 }
 
@@ -25,7 +25,7 @@ export const UserPanel: FC<IUserPanelProps> = ({
   publicKey,
   setIsFunded,
   sendPayment,
-  createXDRTransaction,
+  createPayment,
   signTransaction,
 }) => {
   const [accountExists, setAccountExists] = useState(true);
@@ -99,7 +99,7 @@ export const UserPanel: FC<IUserPanelProps> = ({
           <Payments
             sendPayment={sendPayment}
             senderPublicKey={publicKey}
-            createXDRTransaction={createXDRTransaction}
+            createPayment={createPayment}
             signTransaction={signTransaction}
           />
         ) : (

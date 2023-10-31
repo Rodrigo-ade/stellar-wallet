@@ -6,14 +6,14 @@ import { Notification } from '@/entities/Notification';
 interface IPaymentsProps {
   senderPublicKey: string;
   sendPayment: (senderPrivateKey: string, receiverPublicKey: string, amount: string) => Promise<void | string>;
-  createXDRTransaction: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
+  createPayment: (senderPublicKey: string, receiverPublicKey: string, amount: string) => Promise<string>;
   signTransaction: (xdr: string) => Promise<string>;
 }
 
 export const Payments: FC<IPaymentsProps> = ({
   sendPayment,
   senderPublicKey,
-  createXDRTransaction,
+  createPayment,
   signTransaction,
 }) => {
   const [amount, setAmount] = useState('');
@@ -41,14 +41,19 @@ export const Payments: FC<IPaymentsProps> = ({
 
   async function handleAlbedoPayment() {
     setPaymentNotification({ isSuccess: true, message: 'Loading...' });
-    const xdr = await createXDRTransaction(senderPublicKey, receiverPublicKey, amount);
-    const signed_envelope_xdr = await signTransaction(xdr);
+    try {
+      const xdr = await createPayment(senderPublicKey, receiverPublicKey, amount);
+      const signed_envelope_xdr = await signTransaction(xdr);
 
-    if (signed_envelope_xdr) {
-      setPaymentNotification({ isSuccess: true, message: 'Success!' });
-      clearPaymentFields();
-    } else {
-      setPaymentNotification({ isSuccess: false, message: 'Error' });
+      if (signed_envelope_xdr) {
+        setPaymentNotification({ isSuccess: true, message: 'Success!' });
+        clearPaymentFields();
+      } else {
+        setPaymentNotification({ isSuccess: false, message: 'Error' });
+      }
+    } catch(error) {
+      const { message } = error;
+      setPaymentNotification({ isSuccess: false, message: message });
     }
 
   }

@@ -33,8 +33,9 @@ export async function getAccount(publicKey: string) {
   try {
     const account = await server.loadAccount(publicKey);
     return account;
-  } catch (e) {
-    return new Error('Stellar Api Error');
+  } catch (error) {
+    const { message } = error;
+    return new Error(message);
   }
 }
 
@@ -58,7 +59,7 @@ export async function sendPayment(
     }
 
     if (Number(amount) <= 0) {
-      throw new Error('You can not send 0');
+      throw new Error('You can not transfer 0 XML');
     }
 
     const sourceKeys = Keypair.fromSecret(senderPrivateKey);
@@ -89,12 +90,11 @@ export async function sendPayment(
   }
 }
 
-export async function createXDRTransaction(
+export async function createPayment(
   senderPublicKey: string,
   receiverPublicKey: string,
   amount: string
 ): Promise<string> {
-  let xdr: string;
   try {
     const sourceAccount = await server.loadAccount(senderPublicKey);
     const destination = receiverPublicKey;
@@ -115,10 +115,9 @@ export async function createXDRTransaction(
       .setTimeout(60)
       .build();
 
-    xdr = transaction.toXDR();
-  } catch (e) {
-    xdr = '';
+    return transaction.toXDR();
+  } catch (error) {
+    const { message } = error;
+    throw new Error(message);
   }
-
-  return xdr;
 }
