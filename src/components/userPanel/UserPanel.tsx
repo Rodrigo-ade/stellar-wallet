@@ -31,9 +31,8 @@ export const UserPanel: FC<IUserPanelProps> = ({
   const [accountExists, setAccountExists] = useState(true);
   const [notification, setNotification] = useState<Notification | null>(null);
 
-  const listedPayments = payments?.map((tempPayment, index) => {
-    const { type, asset_code, amount, to, date } = tempPayment;
-
+  const listedPayments = payments?.map(({ type, asset_code, amount, to, date }, index) => {
+    
     return (
       <div
         key={`payment-${index}`}
@@ -52,17 +51,17 @@ export const UserPanel: FC<IUserPanelProps> = ({
     );
   });
 
-  const listedBalance = balance?.map((tempBalance, index) => {
-    const balance = Number(tempBalance.balance).toFixed(2);
-    const asset = tempBalance.asset === 'native' ? 'Lumens (XLM)' : tempBalance.asset;
+  const listedBalance = balance?.map(({balance, asset}, index) => {
+    const userBalance = Number(balance).toFixed(2);
+    const userAsset = asset === 'native' ? 'Lumens (XLM)' : asset;
     const EMPTY_BALANCE = '0.00';
-    if (accountExists && asset === 'XLM' && balance === EMPTY_BALANCE) {
+    if (accountExists && userAsset === 'XLM' && userBalance === EMPTY_BALANCE) {
       setAccountExists(false);
     }
 
     return (
-      <p className={`balance-${index} balance text-3xl font-semibold text-slate-200`} key={asset}>
-        {balance} {asset}
+      <p className={`balance-${index} balance text-3xl font-semibold text-slate-200`} key={userAsset}>
+        {userBalance} {userAsset}
       </p>
     );
   });
